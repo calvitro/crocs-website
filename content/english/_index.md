@@ -5,6 +5,7 @@ banner:
   content: "a lab for criminological research of counterterrorism and security"
   image: "/images/bannerreal.png"
   dark_image: "/images/bannerdark.png"
+  maxWidth: 800
   button:
     enable: true
     label: "See Our Work"

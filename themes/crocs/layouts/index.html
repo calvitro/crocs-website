@@ -6,9 +6,9 @@
       <div class="row justify-center">
 
         <div class="col-13 mb-4">
-          {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px] dark:hidden" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "800x") }}
+          {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px] dark:hidden" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "1400x" "DisplayS" "800x") }}
           {{ if .dark_image }}
-          {{ partial "image" (dict "Src" .dark_image "Alt" "Dark mode banner" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px] hidden dark:block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "800x") }}
+          {{ partial "image" (dict "Src" .dark_image "Alt" "Dark mode banner" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px] hidden dark:block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "1200x" "DisplayS" "800x") }}
           {{ end }}
         </div>
         <div class="lg:col-7 md:col-9 text-center">
@@ -47,9 +47,9 @@
                 md:order-2
               {{ end }} md:col-5 mb-6">
           <div class="pl-4 h-full"> 
-            {{ partial "image" (dict "Src" .image "Alt" "feature image" "Class" "object-contain h-full w-full dark:hidden" "DisplayXL" "1600x" "DisplayLG" "1600x" "DisplayMD" "1000x") }}
+            {{ partial "image" (dict "Src" .image "Alt" "feature image" "Class" "object-contain h-full w-full dark:hidden" "DisplayXL" "1600x" "DisplayLG" "1600x" "DisplayMD" "1000x" "DisplayS" "800x") }}
             {{ if .dark_image }}
-            {{ partial "image" (dict "Src" .dark_image "Alt" "dark feature image" "Class" "object-contain h-full w-full hidden dark:block" "DisplayXL" "1600x" "DisplayLG" "1600x" "DisplayMD" "1000x") }}
+            {{ partial "image" (dict "Src" .dark_image "Alt" "dark feature image" "Class" "object-contain h-full w-full hidden dark:block" "DisplayXL" "1600x" "DisplayLG" "1600x" "DisplayMD" "1000x" "DisplayS" "800x") }}
             {{ end }}
         </div>
         </div>
