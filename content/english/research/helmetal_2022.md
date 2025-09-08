@@ -2,7 +2,7 @@
 title: "Examining incel subculture on Reddit"
 meta_title: ""
 description: "this is meta description"
-date: 2022-04-04T05:00:00Z
+date: 2022-05-01T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["Incels", "Social Media"]
 authors: ["Brenna Helm", "Ryan Scrivens", "Thomas Holt", "Steve Chermak", "Richard Frank"]
