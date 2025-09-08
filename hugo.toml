@@ -1,6 +1,6 @@
 ######################## default configuration ####################
 # The base URL of your site (required). This will be prepended to all relative URLs.
-baseURL = "https://calvitro.github.io/"
+baseURL = "https://calvitro.github.io/crocs-website/"
 # Title of your website (required).
 title = "CROCS Lab"
 # Your theme name
