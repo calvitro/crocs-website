@@ -29,7 +29,7 @@ env:
 jobs:
   # Build job
   build:
-    runs-on: [self-hosted, crocs-website]
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Install Hugo
         run: |
@@ -70,7 +70,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: [self-hosted, cros-website]
+    runs-on: ubuntu-24.04-arm
 
     needs: build
     steps:
