@@ -1,0 +1,42 @@
+{{ define "main" }}
+  <section class="section-sm text-center">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="sm:col-10 md:col-8 lg:col-6">
+          <!-- Image Section -->
+          {{ $imagePath := .Params.image | default "images/404page.png" }}
+          {{ $image := resources.Get $imagePath }}
+
+          {{ warnf "Path: %s, Image Resource: %s" $imagePath $image }}
+
+          {{ if $image }}
+            <div class="mb-8">
+              <img src="{{ $image.RelPermalink }}" alt="404 Error" class="mx-auto max-w-sm lg:max-w-md rounded" />
+            </div>
+          {{ end }}
+          
+          <!-- 404 Content -->
+          <span
+            class="text-[8rem] block font-bold text-text-dark dark:text-darkmode-text-dark">
+            Error
+          </span>
+          <h1 class="h2 mb-4">{{ .Title | default "Page not found" }}</h1>
+          <div class="content">
+            {{ if .Content }}
+              {{ .Content }}
+            {{ else }}
+              <p>
+                Looks like your investigation has been led astray. Get your search back on track.
+              </p>
+            {{ end }}
+          </div>
+          <a
+            href="{{ site.BaseURL | relLangURL }}"
+            class="btn btn-primary mt-8">
+            Back to home
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

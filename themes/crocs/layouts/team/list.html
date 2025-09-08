@@ -1,0 +1,44 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+  <section class="section">
+    <div class="container">
+      <div class="row gx-5">
+        <!-- Main content area -->
+        <div class="lg:col-10">
+          
+          <!-- Co-Directors Section -->
+          <h2 class="text-left text-2xl font-semibold mb-8 text-[#444444]">Co-Directors</h2>
+          <div class="row pb-8">
+            {{ $coDirectors := where site.RegularPages "Params.role" "==" "co-director" }}
+            {{ range $coDirectors }}
+              <div class="md:col-6 lg:col-4 mb-12">
+                {{ partial "components/author-card" . }}
+              </div>
+            {{ end }}
+          </div>
+
+          <!-- Research Associates Section -->
+          <h2 class="text-left text-2xl font-semibold mb-8 text-[#444444]">Research Associates</h2>
+          <div class="row pb-8">
+            {{ $researchAssociates := where site.RegularPages "Params.role" "==" "research associate" }}
+            {{ range $researchAssociates }}
+              <div class="md:col-6 lg:col-4 mb-12">
+                {{ partial "components/author-card" . }}
+              </div>
+            {{ end }}
+          </div>
+
+          <!-- Graduate Students Section -->
+          <h2 class="text-left text-2xl font-semibold mb-8 text-[#444444]">Graduate Students</h2>
+          <div class="row pb-16">
+            {{ $gradStudents := where site.RegularPages "Params.role" "==" "graduate student" }}
+            {{ range $gradStudents }}
+              <div class="md:col-6 lg:col-4 mb-12">
+                {{ partial "components/author-card" . }}
+              </div>
+            {{ end }}
+          </div>
+
+        </div>
+{{ end }}

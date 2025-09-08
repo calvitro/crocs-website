@@ -1,0 +1,76 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="md:col-10 lg:col-6 mx-auto">
+          <form action="{{ site.Params.contact_form_action }}" method="POST">
+            <div class="mb-6">
+              <label for="name" class="form-label">
+                Full Name <span class="text-red-500">*</span>
+              </label>
+              <input
+                id="name"
+                name="name"
+                class="form-input"
+                placeholder="McMellow the Crime Crocodile"
+                type="text" />
+            </div>
+            <div class="mb-6">
+              <label for="email" class="form-label">
+                Working Mail <span class="text-red-500">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="TheCroc@email.com"
+                type="email" />
+            </div>
+            <div class="mb-6">
+              <label for="message" class="form-label">
+                Anything else? <span class="text-red-500">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-input"
+                placeholder="Message goes here..."
+                rows="8"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+          <div class="mt-8">
+            <h3 class="text-lg font-bold mb-4 text-center">Or, Reach Out Directly</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <span class="icon-email text-2xl mr-4 mt-1"></span>
+                <div>
+                  <h4 class="font-semibold">Email</h4>
+                  <a href="mailto:crocslab@crocslab.org" class="text-blue-600 hover:underline">crocslab@crocslab.org</a>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="icon-phone text-2xl mr-4 mt-1"></span>
+                <div>
+                  <h4 class="font-semibold">Phone</h4>
+                  <a href="tel:+1234567890" class="text-blue-600 hover:underline">+1 (234) 567-890</a>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="icon-address text-2xl mr-4 mt-1"></span>
+                <div>
+                  <h4 class="font-semibold">Address</h4>
+                  <p>6001 Dodge St.<br>Omaha, NE 68182</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{{ end }}

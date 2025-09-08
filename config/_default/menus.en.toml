@@ -1,0 +1,58 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[main]]
+name = "Meet the Team"
+url = "/team"
+weight = 2
+
+[[main]]
+name = "Our Research"
+url = "/research"
+weight = 3
+
+[[main]]
+weight = 4
+name = "Pages"
+
+[[main]]
+parent = "Pages"
+name = "Blog"
+url = "/blog"
+
+[[main]]
+parent = "Pages"
+name = "Contact"
+url = "/contact"
+
+[[main]]
+parent = "Pages"
+name = "Gallery"
+url = "/gallery"
+
+[[main]]
+parent = "Pages"
+name = "404 Page"
+url = "/404.html"
+
+
+# footer menu
+[[footer]]
+name = "Contact Us"
+url = "/contact"
+weight = 1
+
+[[footer]]
+name = "Meet the Team"
+url = "/team"
+weight = 2
+
+[[footer]]
+name = "Privacy Policy"
+url = "/privacy-policy"
+weight = 3

@@ -1,0 +1,86 @@
+{{ define "main" }}
+  <section class="section-sm pb-0">
+    <div class="container">
+      <div
+        class="row border-border dark:border-darkmode-border justify-center border-b pb-14">
+        <div class="lg:col-6 text-center">
+          {{ $image:= .Params.image }}
+          {{ if $image }}
+            {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "mx-auto" "Size" "400x400") }}
+          {{ else if .Params.Email }}
+            <img
+              class="mx-auto"
+              alt="{{ .Title }}"
+              height="400"
+              width="400"
+              src="https://www.gravatar.com/avatar/{{ md5 .Params.Email }}?s=128&pg&d=identicon" />
+          {{ end }}
+          <h1 class="h3 mt-10">{{ .Title }}</h1>
+          <div class="content mt-6">
+            {{ .Content }}
+          </div>
+          <ul class="social-icons ml-4 mt-10 text-center">
+            {{ range .Params.social }}
+              <li>
+                <a
+                  href="{{ .link | safeURL }}"
+                  target="_blank"
+                  rel="noopener nofollow">
+                  <span class="sr-only">{{ .title }}</span>
+                  <i class="{{ .icon }}"></i>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+
+   <!-- Read Their Work Section -->
+      {{ $authorName := .Title }}
+      {{ $authorPosts := slice }}
+      
+      <!-- Check for posts with single author field -->
+      {{ $singleAuthorPosts := where site.RegularPages "Params.author" "==" $authorName }}
+      {{ $authorPosts = $authorPosts | append $singleAuthorPosts }}
+      
+      <!-- Check for posts with multiple authors field -->
+      {{ range site.RegularPages }}
+        {{ if .Params.authors }}
+          {{ if reflect.IsSlice .Params.authors }}
+            {{ if in .Params.authors $authorName }}
+              {{ $authorPosts = $authorPosts | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <!-- Remove duplicates -->
+      {{ $authorPosts = uniq $authorPosts }}
+      
+      {{ if $authorPosts }}
+        <div class="row pt-14">
+          <div class="col-12 mb-8">
+            <h2 class="h3">Publications by {{ .Title }}</h2>
+            <p class="text-text-light dark:text-darkmode-text-light">{{ len $authorPosts }} publication{{ if ne (len $authorPosts) 1 }}s{{ end }} found</p>
+          </div>
+          {{ range $authorPosts }}
+            <div class="md:col-6 lg:col-4 mb-12">
+              {{ partial "components/blog-card" . }}
+            </div>
+          {{ end }}
+        </div>
+      {{ else }}
+        <div class="row pt-14">
+          <div class="col-12 text-center">
+            <h2 class="h4 mb-4">No Publications Found</h2>
+            <p class="text-text-light dark:text-darkmode-text-light">No research papers found for {{ .Title }}.</p>
+            <a href="{{ `research/` | relLangURL }}" class="btn btn-primary mt-4">
+              <i class="fas fa-arrow-left mr-2"></i>
+              View All Research
+            </a>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

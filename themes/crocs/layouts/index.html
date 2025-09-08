@@ -1,0 +1,119 @@
+{{ define "main" }}
+  <!-- Banner -->
+  {{ with .Params.banner }}
+ <section class="pt-0 pb-3">
+    <div class="container">
+      <div class="row justify-center">
+
+        <div class="col-13 mb-4">
+          {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px] dark:hidden" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "800x") }}
+          {{ if .dark_image }}
+          {{ partial "image" (dict "Src" .dark_image "Alt" "Dark mode banner" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px] hidden dark:block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "800x") }}
+          {{ end }}
+        </div>
+        <div class="lg:col-7 md:col-9 text-center">
+          <h1 class="mb-4 text-h3 lg:text-h1">
+            {{ .title | markdownify }}
+          </h1>
+          <p class="mb-12">
+            {{ .content | markdownify }}  
+          </p>
+          {{ with .button }}
+            {{ if .enable }}
+              <a
+                class="btn btn-primary"
+                href="{{ .link | absURL }}"
+                {{ if strings.HasPrefix .link `http` }}
+                  target="_blank" rel="noopener"
+                {{ end }}>
+                {{ .label }}
+                <i class="fa fa-arrow-right pl-2"></i>
+              </a>
+            {{ end }}
+          {{ end }}
+        </div>
+
+      </div>
+    </div>
+  </section>
+{{ end }}
+  <!-- /Banner -->  
+  <!-- Features -->
+  {{ range $i, $e:= .Params.features }}
+    <section class="section-sm features-section {{ if (modBool $i 2) }}bg-accent dark:bg-darkmode-dark{{ end }}">
+    <div class="container-fluid h-full">
+      <div class="row h-full items-center justify-between">
+        <div class="mb:md-0 {{ if not (modBool $i 2) }}
+                md:order-2
+              {{ end }} md:col-5 mb-6">
+          <div class="pl-4 h-full"> 
+            {{ partial "image" (dict "Src" .image "Alt" "feature image" "Class" "object-contain h-full w-full dark:hidden" "DisplayXL" "1600x" "DisplayLG" "1600x" "DisplayMD" "1000x") }}
+            {{ if .dark_image }}
+            {{ partial "image" (dict "Src" .dark_image "Alt" "dark feature image" "Class" "object-contain h-full w-full hidden dark:block" "DisplayXL" "1600x" "DisplayLG" "1600x" "DisplayMD" "1000x") }}
+            {{ end }}
+        </div>
+        </div>
+        <div
+          class="{{ if not (modBool $i 2) }}
+                md:order-1
+              {{ end }} md:col-7 lg:col-6">
+          <div class="pl-4 pr-10"> <h2 class="mb-9">
+                {{ .title | markdownify }}
+              </h2>
+              <p class="mb-9 text-lg">
+                {{ .content | markdownify }}
+              </p>
+              <ul>
+                {{ range .bulletpoints }}
+                  <li class="relative mb-4 pl-6">
+                    <i class="fas fa-caret-right fa-2xs absolute left-3 top-3"></i>
+                    {{ . | markdownify }}
+                  </li>
+                {{ end }}
+              </ul>
+              {{ with .button }}
+                {{ if .enable }}
+                  <a class="btn btn-primary mt-6" href="{{ .link | absURL }}">
+                    {{ .label }}
+                    <i class="fa fa-arrow-right pl-2"></i>
+                  </a>
+                {{ end }}
+              {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+  <!-- /Features -->
+
+  <!-- Testimonials -->
+{{ with site.GetPage "sections/testimonial" }}
+  {{ if .Params.enable }}
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
+            <h2 class="mb-4">
+              {{ .Title | markdownify }}
+            </h2>
+            <p>
+              {{ .Params.description | markdownify }}
+            </p>
+          </div>
+          <div class="col-12">
+          <div class="row justify-center">
+            {{ range .Params.projects }}
+              <div class="lg:col-4 md:col-6 mb-8">
+                {{ partial "components/blog-card.html" (dict "Title" .title "Permalink" .link "Summary" .description "Params" (dict "image" .avatar "authors" .authors "categories" .categories)) }}
+
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}
+  <!-- /Testimonials -->
+{{ end }}

@@ -1,0 +1,65 @@
+<div class="bg-body dark:bg-darkmode-body">
+  {{ $image := "" }}
+  {{ if (and (ne .Params.image nil) (ne .Params.image "")) }}
+    {{ $image = .Params.image }}
+  {{ else if (and (ne .image nil) (ne .image "")) }}
+    {{ $image = .image }}
+  {{ else if (and (ne .Params.avatar nil) (ne .Params.avatar "")) }}
+    {{ $image = .Params.avatar }}
+  {{ end }}
+
+  {{ if $image }}
+    {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "mb-6 w-full aspect-[8/3] rounded object-cover") }}
+  {{ end }}
+
+  <h4 class="mb-3">
+    <a href="{{ .Permalink }}">
+      {{ .Title }}
+    </a>
+  </h4>
+
+  {{ $categories := .Params.categories }}
+  {{ if $categories }}
+    <ul class="mb-4">
+      <!-- Authors Section -->
+      {{ with .Params.authors }}
+        {{ if reflect.IsSlice . }}
+          <li class="mr-4 inline-block">
+            <i class="fa-regular fa-circle-user mr-2"></i>
+            {{ range $i, $author := . }}
+              <a href="{{ `team/` | relLangURL }}{{ $author | urlize }}" 
+                 class="author-filter-link" 
+                 data-author="{{ $author }}">
+                {{ $author }}
+              </a>{{ if ne $i (sub (len .) 1) }}, {{ end }}
+            {{ end }}
+          </li>
+        {{ else }}
+          <li class="mr-4 inline-block">
+            <i class="fa-regular fa-circle-user mr-2"></i>
+            <a href="{{ `research/` | relLangURL }}#author={{ . | urlize }}" 
+               class="author-filter-link" 
+               data-author="{{ . }}">
+              {{ . }}
+            </a>
+          </li>
+        {{ end }}
+      {{ end }}
+
+      <!-- categories Section -->
+      <li class="mr-4 inline-block">
+        <i class="fa-regular fa-folder mr-1"></i>
+        {{ range $i,$p:= $categories }}
+          <a href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/" class="ms-1">
+            {{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}{{ "," }}{{ end }}
+          </a>
+        {{ end }}
+      </li>
+    </ul>
+  {{ end }}
+
+  <p class="mb-6">{{ .Summary | plainify }}</p>
+  <a class="btn btn-outline-primary btn-sm" href="{{ .Permalink }}">
+    {{ T "read_more" }}
+  </a>
+</div>
