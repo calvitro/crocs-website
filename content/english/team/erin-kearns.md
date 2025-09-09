@@ -28,6 +28,18 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-7895-9129
+
+  - name: Twitter
+    icon: fab fa-twitter
+    link: https://x.com/
+
+  - name: GitHub
+    icon: fab fa-github
+    link: https://github.com/
+
+  - name: Website
+    icon: fas fa-globe
+    link: https://www.erinmkearns.com/
 ---
 Co-Director
 <!--more-->

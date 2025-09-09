@@ -28,6 +28,18 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-3885-199X
+
+  - name: Twitter
+    icon: fab fa-twitter
+    link: https://x.com/
+
+  - name: GitHub
+    icon: fab fa-github
+    link: https://github.com/
+
+  - name: Website
+    icon: fas fa-globe
+    link: https://google.com/
 ---
 Research Associate
 <!--more-->

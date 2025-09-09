@@ -32,6 +32,14 @@ social:
   - name: Twitter
     icon: fab fa-twitter
     link: https://x.com/M_H_Becker
+
+  - name: GitHub
+    icon: fab fa-github
+    link: https://github.com/mhbecker
+
+  - name: Website
+    icon: fas fa-globe
+    link: https://www.michaelhbecker.com/
 ---
 Research Associate
 

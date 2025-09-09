@@ -17,7 +17,7 @@
     {{ .Summary | plainify }}
   </p>
   <ul class="social-icons">
-    <ul class="flex justify-center flex-wrap gap-x-3 gap-y-3 mt-4 max-w-full">
+    <ul class="flex justify-center flex-wrap gap-x-3 gap-y-3 mt-3 max-w-full">
     {{ range .Params.social }}
       <li>
         <a href="{{ .link | safeURL }}" target="_blank" rel="noopener nofollow" class="block">
