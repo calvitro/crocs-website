@@ -1,5 +1,5 @@
 ---
-title: "Investigating terrorist use of improvised explosive devices in the United States: Evidence from US federal court cases, 2009-2024"
+title: "Investigating terrorist use of improvised explosive devices in the United States: Evidence from US federal court cases, 2009–2024"
 meta_title: ""
 description: "this is meta description"
 date: 2025-06-04T05:00:00Z

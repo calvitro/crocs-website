@@ -1,5 +1,5 @@
 ---
-title: "Sentencing terrorist leaders and their followers: Evidence from Islamic State defendants in U.S. Federal courts, 2014–2024"
+title: "Sentencing terrorist leaders and their followers: Evidence from Islamic State defendants in U.S. federal courts, 2014–2024"
 meta_title: ""
 description: "this is meta description"
 date: 2025-03-09T05:00:00Z
