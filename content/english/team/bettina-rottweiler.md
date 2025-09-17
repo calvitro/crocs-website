@@ -6,7 +6,6 @@ email: brottweiler@unomaha.edu
 description: "Bettina Rottweiler"
 image: "/images/altlogo.png"
 categories: ["Youth Mobilization", "Extremism", "Conspiracy Theories"]
-tags: ["researcher", "researchassociate"]
 draft: false
 social:
   - name: CV
@@ -23,15 +22,11 @@ social:
   
   - name: email
     icon: fas fa-envelope
-    link: mailto:mbecker26@unomaha.edu
+    link: mailto:brottweiler@unomaha.edu
 
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-3885-199X
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github

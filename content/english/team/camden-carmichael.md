@@ -6,7 +6,6 @@ email: camdencarmichael@unomaha.edu
 description: "camden carmichael"
 image: "/images/altlogo.png"
 categories: ["ISIS", "Courts"]
-tags: ["researcher", "gradstudent"]
 draft: false
 social:
   - name: CV
@@ -29,9 +28,6 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0009-0009-7336-4917
 
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github

@@ -6,7 +6,6 @@ email: bhelm@unomaha.edu
 description: "Brenna Helm"
 image: "/images/altlogo.png"
 categories: ["Extremism", "Incels", "Online Subcultures"]
-tags: ["researcher", "researchassociate"]
 draft: false
 social:
   - name: CV
@@ -23,15 +22,11 @@ social:
   
   - name: email
     icon: fas fa-envelope
-    link: mailto:mbecker26@unomaha.edu
+    link: mailto:bhelm@unomaha.edu
 
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-6412-2037
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github

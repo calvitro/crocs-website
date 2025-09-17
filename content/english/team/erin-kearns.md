@@ -6,7 +6,6 @@ email: ekearns@unomaha.edu
 description: "erin kearns"
 image: "/images/altlogo.png"
 categories: ["Event Security", "SAR", "Media"]
-tags: ["researcher", "director"]
 draft: false
 social:
   - name: CV
@@ -28,10 +27,6 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-7895-9129
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github

@@ -4,9 +4,8 @@ role: "co-director"
 meta_title: ""
 email: adoctor@unomaha.edu
 description: "austin doctor"
-image: "/images/altlogo.png"
-categories: ["Political Science", "IED", "Leadership"]
-tags: ["researcher", "director"]
+image: "/images/Doctor_Photo.png"
+categories: ["ISIS", "IEDs", "Leadership", "FTFs", "Courts", "Youth Mobilization"]
 draft: false
 social:
   - name: CV
@@ -29,10 +28,6 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0000-0003-1397-0092
 
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/austincdoctor
-
   - name: GitHub
     icon: fab fa-github
     link: https://github.com/
@@ -43,4 +38,4 @@ social:
 ---
 Co-Director
 <!--more-->
-Dr. Austin C. Doctor is a member of the executive committee for the National Counterterrorism Innovation, Technology, and Education Center, a DHS Center of Excellence. Dr. Doctor studies terrorism and political violence, armed conflict, and political instability with a focus on the region of sub-Saharan Africa. His current projects investigate topics relating to militant leadership, insurgent operations and tactics, foreign fighters, and electoral violence. His work is published in numerous academic journals, including International Studies Quarterly, the Journal of Conflict Resolution, Terrorism and Political Violence, Civil Wars, the Journal of Global Security Studies, and Parameters.
+Austin Doctor, Ph.D., is an Associate Professor in the School of Criminology and Criminal Justice and the Director of Strategic Initiatives at the National Counterterrorism Innovation, Technology, and Education Center based at the University of Nebraska at Omaha. His research specializes in terrorism and emerging threats. His work is published in _Terrorism and Political Violence_, _Perspectives on Terrorism_, _The Journal of Conflict Resolution_, _International Studies Quarterly_, _Global Crime_, and other peer-reviewed journals. Doctor's work informs U.S. homeland security and homeland defense in support of partners across federal law enforcement, the U.S. military, and U.S. Intelligence Community. 

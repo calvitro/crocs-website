@@ -6,7 +6,6 @@ email: sschappert@unomaha.edu
 description: "Sarah Schappert"
 image: "/images/altlogo.png"
 categories: ["Event Security", "Online"]
-tags: ["researcher", "gradstudent"]
 draft: false
 social:
   - name: CV
@@ -28,10 +27,6 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github

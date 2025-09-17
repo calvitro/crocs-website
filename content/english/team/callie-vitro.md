@@ -6,7 +6,6 @@ email: cvitro@unomaha.edu
 description: "callie vitro"
 image: "/images/altlogo.png"
 categories: ["Event Security", "Leadership", "ISIS"]
-tags: ["researcher", "gradstudent"]
 draft: false
 social:
   - name: CV
@@ -29,17 +28,6 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0000-0001-6038-9394
 
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/callievitro
-
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Graduate Research Assistant
 

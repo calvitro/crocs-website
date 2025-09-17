@@ -12,13 +12,24 @@ url = "/team"
 weight = 2
 
 [[main]]
-name = "Our Research"
-url = "/research"
 weight = 3
+name = "Our Research"
+
 
 [[main]]
-weight = 4
-name = "Pages"
+parent = "Our Research"
+name = "Manucripts"
+url = "/manuscripts"
+
+[[main]]
+parent = "Our Research"
+name = "Reports"
+url = "/reports"
+
+[[main]]
+parent = "Our Research"
+name = "See All Research"
+url = "/research"
 
 [[main]]
 parent = "Pages"

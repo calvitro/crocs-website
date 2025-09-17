@@ -28,15 +28,137 @@
   <li class="mr-4 inline-block">
     <i class="fa-regular fa-circle-user mr-2"></i>
     {{ range $i, $author := $allAuthors }}
-      <a href="{{ `research/` | relLangURL }}#author={{ $author | urlize }}" 
+      {{ $authorSlug := $author | lower | replaceRE "\\s+" "-" | replaceRE "[^a-z0-9-]" "" }}
+      <a href="javascript:void(0)" 
          class="author-filter-link" 
-         data-author="{{ $author }}">
+         data-author="{{ $author }}"
+         data-author-slug="{{ $authorSlug }}">
         {{ $author }}
       </a>
       {{ if ne $i (sub (len $allAuthors) 1) }}, {{ end }}
     {{ end }}
   </li>
 {{ end }}
+<script>
+    // Function to check if an author page exists
+    async function authorPageExists(authorSlug) {
+      try {
+        // Get the base URL from the current page - need to go back to the site root
+        const currentPath = window.location.pathname;
+        let baseUrl;
+        
+        if (currentPath.includes('/research/')) {
+          // We're in a research page, get the base before /research/
+          baseUrl = currentPath.split('/research/')[0];
+        } else {
+          // Fallback - try to get base from path structure
+          const pathParts = currentPath.split('/').filter(part => part);
+          if (pathParts.length >= 2) {
+            baseUrl = '/' + pathParts.slice(0, -1).join('/');
+          } else {
+            baseUrl = '';
+          }
+        }
+        
+        // Try multiple URL variations with proper base path
+        const urls = [
+          `${baseUrl}/team/${authorSlug}/`,
+          `${baseUrl}/team/${authorSlug}`,
+          `${baseUrl}/team/${authorSlug}.html`,
+          `/team/${authorSlug}/`,  // fallback without base
+          `/team/${authorSlug}`    // fallback without base
+        ];
+        
+        console.log('Base URL:', baseUrl);
+        console.log('Checking URLs:', urls);
+        
+        for (const url of urls) {
+          const response = await fetch(url, { 
+            method: 'HEAD',
+            cache: 'no-cache'
+          });
+          console.log(`URL ${url}: ${response.status}`);
+          if (response.ok) {
+            return { exists: true, url: url };
+          }
+        }
+        return { exists: false, url: null };
+      } catch (error) {
+        console.log('Error checking author page:', error);
+        return { exists: false, url: null };
+      }
+    }
+
+    // Function to create author slug (matching your filename format)
+    function createAuthorSlug(authorName) {
+      return authorName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')           // Replace spaces with hyphens
+        .replace(/[^a-z0-9-]/g, '')     // Remove special characters except hyphens
+        .replace(/-+/g, '-')            // Replace multiple hyphens with single
+        .replace(/^-+|-+$/g, '');       // Remove leading/trailing hyphens
+    }
+
+    // Function to handle author link clicks
+    async function handleAuthorClick(event, authorName, authorSlug = null) {
+      event.preventDefault();
+      
+      console.log('Clicked author:', authorName);
+      
+      // Use provided slug or generate one
+      const slug = authorSlug || createAuthorSlug(authorName);
+      console.log('Using slug:', slug);
+      
+      // Check if author page exists
+      const pageCheck = await authorPageExists(slug);
+      console.log('Page check result:', pageCheck);
+      
+      if (pageCheck.exists) {
+        // Navigate to the author's team page
+        console.log('Navigating to team page:', pageCheck.url);
+        window.location.href = pageCheck.url;
+      } else {
+        // Navigate to research page with filter
+        console.log('No team page found, filtering research');
+        // Get the research page URL - go back to research page
+        const currentPath = window.location.pathname;
+        let researchUrl;
+
+        if (currentPath.includes('/research/')) {
+          // We're in a research page, go back to research listing
+          researchUrl = currentPath.split('/research/')[0] + '/research/';
+        } else {
+          // Fallback - try to construct the path
+          const pathParts = currentPath.split('/').filter(part => part);
+          if (pathParts.length >= 2) {
+            researchUrl = '/' + pathParts.slice(0, -1).join('/') + '/';
+          } else {
+            researchUrl = '/research/'; // Final fallback
+          }
+        }
+        
+        console.log('Research URL:', researchUrl);
+        window.location.href = `${researchUrl}#author=${encodeURIComponent(slug)}`;
+      }
+    }
+
+    // Attach event listeners to author links
+    function attachAuthorListeners() {
+      document.querySelectorAll('.author-filter-link').forEach(link => {
+        link.addEventListener('click', function(event) {
+          const authorName = this.dataset.author || this.textContent.trim();
+          const authorSlug = this.dataset.authorSlug;  // Get the pre-computed slug
+          handleAuthorClick(event, authorName, authorSlug);
+        });
+      });
+    }
+
+    // Initialize when page loads
+    window.addEventListener('load', function() {
+      attachAuthorListeners();
+    });
+  </script>
             <!-- categories Section -->
             {{ $categories:= .Params.categories }}
             {{ if $categories }}
@@ -56,7 +178,7 @@
             <!-- Publish Date -->
             <li class="mr-4 inline-block">
               <i class="fa-regular fa-clock mr-2"></i>
-              {{ time.Format ":date_long" .PublishDate }}
+              {{ time.Format "January 2006" .PublishDate }}
             </li>
           </ul>
           <div class="content mb-10">
@@ -108,10 +230,72 @@
             </div>
           </div>
 
-      <!-- Related posts -->
-      {{ $related := .Site.RegularPages.Related . | first 10 }}
-      {{ $related = $related | shuffle | first 3 }}
-      {{ with $related }}
+<!-- Related posts -->
+      {{ $currentPage := . }}
+      {{ $currentTitle := .Title }}
+      {{ $relatedPosts := slice }}
+      {{ $seenTitles := slice $currentTitle }}
+      
+      <!-- Get current page metadata -->
+      {{ $currentCategories := .Params.categories }}
+      {{ $currentAuthors := .Params.authors }}
+      {{ $currentSingleAuthor := .Params.author }}
+      {{ $currentTags := .Params.tags }}
+      
+      <!-- Combine single author with authors array -->
+      {{ $allCurrentAuthors := slice }}
+      {{ if $currentAuthors }}
+        {{ if reflect.IsSlice $currentAuthors }}
+          {{ $allCurrentAuthors = $currentAuthors }}
+        {{ else }}
+          {{ $allCurrentAuthors = slice $currentAuthors }}
+        {{ end }}
+      {{ end }}
+      {{ if $currentSingleAuthor }}
+        {{ $allCurrentAuthors = $allCurrentAuthors | append $currentSingleAuthor }}
+      {{ end }}
+      {{ $allCurrentAuthors = uniq $allCurrentAuthors }}
+      
+      <!-- 1. First priority: Posts with matching categories -->
+      {{ if $currentCategories }}
+        {{ range site.RegularPages }}
+          {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.categories }}
+            {{ $hasMatchingCategory := false }}
+            {{ range .Params.categories }}
+              {{ if in $currentCategories . }}
+                {{ $hasMatchingCategory = true }}
+              {{ end }}
+            {{ end }}
+            {{ if $hasMatchingCategory }}
+              {{ $relatedPosts = $relatedPosts | append . }}
+              {{ $seenTitles = $seenTitles | append .Title }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      <!-- 3. Third priority: Posts with matching tags (if we still need more) -->
+      {{ if and (lt (len $relatedPosts) 10) $currentTags }}
+        {{ range site.RegularPages }}
+          {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.tags }}
+            {{ $hasMatchingTag := false }}
+            {{ range .Params.tags }}
+              {{ if in $currentTags . }}
+                {{ $hasMatchingTag = true }}
+              {{ end }}
+            {{ end }}
+            {{ if $hasMatchingTag }}
+              {{ $relatedPosts = $relatedPosts | append . }}
+              {{ $seenTitles = $seenTitles | append .Title }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <!-- Limit to 3 posts and shuffle -->
+      {{ $relatedPosts = $relatedPosts | first 10 | shuffle | first 3 }}
+      
+      {{ with $relatedPosts }}
         <div class="section pb-0">
           <h2 class="h3 mb-12">{{ T "related_posts" }}</h2>
           <div class="row">

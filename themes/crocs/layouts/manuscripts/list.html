@@ -1,0 +1,337 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+  <section class="section">
+    <div class="container">
+      <div class="row gx-5">
+        <!-- blog posts -->
+        <div class="lg:col-8">
+          <!-- Author filter notification (initially hidden) -->
+          <div id="author-filter-notice" class="alert alert-info mb-6 hidden">
+            <div class="flex items-center justify-between">
+              <div>
+                <strong>Manuscripts by:</strong> <span id="filtered-author-name"></span>
+              </div>
+              <button onclick="clearAuthorFilter()" class="btn btn-sm btn-outline-primary">
+                Show All Manuscripts
+              </button>
+            </div>
+          </div>
+          
+          <div class="row" id="blog-container">
+            {{ range $index, $page := .RegularPages }}
+              <div class="md:col-6 mb-14 blog-card {{ if ge $index 4 }}hidden{{ end }}" 
+                   data-index="{{ $index }}"
+                   data-authors="{{ if $page.Params.authors }}{{ delimit $page.Params.authors "," }}{{ end }}{{ if $page.Params.author }},{{ $page.Params.author }}{{ end }}">
+                {{ partial "components/blog-card" $page }}
+              </div>
+            {{ end }}
+          </div>
+          
+          <!-- See All Research Button -->
+          <div class="text-center mb-8" id="see-all-container">
+            <button 
+              id="see-all-btn" 
+              class="btn btn-primary"
+              onclick="toggleAllPosts()">
+              See All Manuscripts
+              <i class="fa fa-arrow-right pl-2"></i>
+            </button>
+          </div>
+          
+          <!-- Show Less Button (initially hidden) -->
+          <div class="text-center mb-8 hidden" id="show-less-container">
+            <button 
+              id="show-less-btn" 
+              class="btn btn-outline-primary"
+              onclick="toggleAllPosts()">
+              Show Less
+              <i class="fa fa-arrow-up pl-2"></i>
+            </button>
+          </div>
+          
+          <!-- No results message -->
+          <div id="no-results" class="text-center py-16 hidden">
+            <h3 class="h4 mb-4">No Publications Found</h3>
+            <p class="text-text-light dark:text-darkmode-text-light mb-6">No research papers found for this author.</p>
+            <button onclick="clearAuthorFilter()" class="btn btn-primary">
+              View All Research
+            </button>
+          </div>
+        </div>
+        
+        <!-- sidebar -->
+        <div class="lg:col-4">
+          <!-- widget -->
+          {{ $widget:= site.Params.widgets.sidebar }}
+          {{ partialCached "widgets/widget-wrapper" ( dict "Widgets" $widget "Scope" . ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let showingAll = false;
+    let currentFilter = null;
+
+    // Function to check if an author page exists
+    async function authorPageExists(authorSlug) {
+      try {
+        // Get the base URL from the current page
+        const baseUrl = window.location.pathname.split('/').slice(0, -2).join('/') || '';
+        
+        // Try multiple URL variations with proper base path
+        const urls = [
+          `${baseUrl}/team/${authorSlug}/`,
+          `${baseUrl}/team/${authorSlug}`,
+          `${baseUrl}/team/${authorSlug}.html`,
+          `/team/${authorSlug}/`,  // fallback without base
+          `/team/${authorSlug}`    // fallback without base
+        ];
+        
+        console.log('Checking URLs:', urls);
+        
+        for (const url of urls) {
+          const response = await fetch(url, { 
+            method: 'HEAD',
+            cache: 'no-cache'
+          });
+          console.log(`URL ${url}: ${response.status}`);
+          if (response.ok) {
+            return { exists: true, url: url };
+          }
+        }
+        return { exists: false, url: null };
+      } catch (error) {
+        console.log('Error checking author page:', error);
+        return { exists: false, url: null };
+      }
+    }
+
+    // Function to create author slug (matching your filename format)
+    function createAuthorSlug(authorName) {
+      return authorName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')           // Replace spaces with hyphens
+        .replace(/[^a-z0-9-]/g, '')     // Remove special characters except hyphens
+        .replace(/-+/g, '-')            // Replace multiple hyphens with single
+        .replace(/^-+|-+$/g, '');       // Remove leading/trailing hyphens
+    }
+
+    // Function to handle author link clicks
+    async function handleAuthorClick(event, authorName, authorSlug = null) {
+      event.preventDefault();
+      
+      console.log('Clicked author:', authorName);
+      
+      // Use provided slug or generate one
+      const slug = authorSlug || createAuthorSlug(authorName);
+      console.log('Using slug:', slug);
+      
+      // Check if author page exists
+      const pageCheck = await authorPageExists(slug);
+      console.log('Page check result:', pageCheck);
+      
+      if (pageCheck.exists) {
+        // Navigate to the author's team page
+        console.log('Navigating to team page:', pageCheck.url);
+        window.location.href = pageCheck.url;
+      } else {
+        // Navigate to research page with filter
+        console.log('No team page found, filtering research');
+        window.location.hash = `author=${encodeURIComponent(slug)}`;
+        filterByAuthor(authorName);
+      }
+    }
+
+    function toggleAllPosts() {
+      const seeAllContainer = document.getElementById('see-all-container');
+      const showLessContainer = document.getElementById('show-less-container');
+
+      if (!showingAll) {
+        // Show all visible posts (respecting author filter)
+        const filteredCards = currentFilter ? 
+          document.querySelectorAll(`.blog-card[data-authors*="${currentFilter}"]:not(.author-hidden)`) :
+          document.querySelectorAll('.blog-card');
+          
+        filteredCards.forEach(card => {
+          card.classList.remove('hidden');
+        });
+        
+        seeAllContainer.classList.add('hidden');
+        showLessContainer.classList.remove('hidden');
+        showingAll = true;
+      } else {
+        // Show only first 4 visible posts
+        const filteredCards = currentFilter ? 
+          document.querySelectorAll(`.blog-card[data-authors*="${currentFilter}"]:not(.author-hidden)`) :
+          document.querySelectorAll('.blog-card:not(.author-hidden)');
+          
+        filteredCards.forEach((card, index) => {
+          if (index >= 4) {
+            card.classList.add('hidden');
+          }
+        });
+        
+        seeAllContainer.classList.remove('hidden');
+        showLessContainer.classList.add('hidden');
+        showingAll = false;
+        
+        // Scroll back to top of blog section
+        document.getElementById('blog-container').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+
+    function filterByAuthor(authorName) {
+      console.log('filterByAuthor called with:', authorName);
+      currentFilter = authorName;
+      const allCards = document.querySelectorAll('.blog-card');
+      const authorFilterNotice = document.getElementById('author-filter-notice');
+      const filteredAuthorName = document.getElementById('filtered-author-name');
+      const noResults = document.getElementById('no-results');
+      const seeAllContainer = document.getElementById('see-all-container');
+      const showLessContainer = document.getElementById('show-less-container');
+      
+      // Show filter notification with proper formatting
+      authorFilterNotice.classList.remove('hidden');
+      const displayName = authorName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      filteredAuthorName.textContent = displayName;
+      
+      let visibleCount = 0;
+      
+      // Filter cards by author (case-insensitive, handle URL encoding)
+      allCards.forEach((card, index) => {
+        const cardAuthors = (card.dataset.authors || '').toLowerCase();
+        const searchName = authorName.toLowerCase().replace(/[-]/g, ' ');
+        
+        console.log('Card authors:', cardAuthors, 'Search name:', searchName);
+        
+        if (cardAuthors.includes(searchName)) {
+          card.classList.remove('author-hidden');
+          // Show first 4 matching posts
+          if (visibleCount < 4) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        } else {
+          card.classList.add('author-hidden');
+          card.classList.add('hidden');
+        }
+      });
+      
+      console.log('Found', visibleCount, 'visible cards');
+      
+      // Show/hide appropriate buttons and messages
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        seeAllContainer.classList.add('hidden');
+        showLessContainer.classList.add('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        // Show "See All" button if there are more than 4 matching posts
+        const totalMatching = document.querySelectorAll('.blog-card:not(.author-hidden)').length;
+        if (totalMatching > 4) {
+          seeAllContainer.classList.remove('hidden');
+          document.getElementById('see-all-btn').classList.remove('hidden');
+        } else {
+          seeAllContainer.classList.add('hidden');
+        }
+      }
+      
+      showingAll = false;
+      showLessContainer.classList.add('hidden');
+      
+      // Scroll to top
+      document.getElementById('blog-container').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    function clearAuthorFilter() {
+      currentFilter = null;
+      window.location.hash = '';
+      const allCards = document.querySelectorAll('.blog-card');
+      const authorFilterNotice = document.getElementById('author-filter-notice');
+      const noResults = document.getElementById('no-results');
+      const seeAllContainer = document.getElementById('see-all-container');
+      const showLessContainer = document.getElementById('show-less-container');
+      
+      // Hide filter notification
+      authorFilterNotice.classList.add('hidden');
+      noResults.classList.add('hidden');
+      
+      // Reset all cards to original state
+      allCards.forEach((card, index) => {
+        card.classList.remove('author-hidden');
+        if (index < 4) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      
+      // Show "See All" button if there are more than 4 total posts
+      if (allCards.length > 4) {
+        seeAllContainer.classList.remove('hidden');
+        document.getElementById('see-all-btn').classList.remove('hidden');
+      }
+      
+      showingAll = false;
+      showLessContainer.classList.add('hidden');
+    }
+
+    // Attach event listeners to author links
+    function attachAuthorListeners() {
+      document.querySelectorAll('.author-filter-link').forEach(link => {
+        link.addEventListener('click', function(event) {
+          const authorName = this.dataset.author || this.textContent.trim();
+          const authorSlug = this.dataset.authorSlug;  // Get the pre-computed slug
+          handleAuthorClick(event, authorName, authorSlug);
+        });
+      });
+    }
+
+    // Check for author filter in URL on page load
+    window.addEventListener('load', function() {
+      // Attach author link listeners
+      attachAuthorListeners();
+      
+      const hash = window.location.hash;
+      if (hash.startsWith('#author=')) {
+        const authorName = decodeURIComponent(hash.replace('#author=', '').replace(/[+]/g, ' '));
+        filterByAuthor(authorName);
+      } else {
+        // Initialize "See All" button visibility
+        const allCards = document.querySelectorAll('.blog-card');
+        console.log('Total cards found:', allCards.length);
+        if (allCards.length > 4) {
+          const seeAllContainer = document.getElementById('see-all-container');
+          const seeAllBtn = document.getElementById('see-all-btn');
+          console.log('Showing See All button');
+          seeAllContainer.classList.remove('hidden');
+          if (seeAllBtn) {
+            seeAllBtn.classList.remove('hidden');
+          }
+        }
+      }
+    });
+
+    // Handle hash changes (browser back/forward buttons)
+    window.addEventListener('hashchange', function() {
+      const hash = window.location.hash;
+      if (hash.startsWith('#author=')) {
+        const authorName = decodeURIComponent(hash.replace('#author=', '').replace(/[+]/g, ' '));
+        filterByAuthor(authorName);
+      } else if (hash === '') {
+        clearAuthorFilter();
+      }
+    });
+  </script>
+{{ end }}

@@ -32,7 +32,7 @@
           <div class="text-center mb-8" id="see-all-container">
             <button 
               id="see-all-btn" 
-              class="btn btn-primary hidden"
+              class="btn btn-primary"
               onclick="toggleAllPosts()">
               See All Research
               <i class="fa fa-arrow-right pl-2"></i>
@@ -77,34 +77,75 @@
     // Function to check if an author page exists
     async function authorPageExists(authorSlug) {
       try {
-        const response = await fetch(`/team/${authorSlug}/`, { method: 'HEAD' });
-        return response.ok;
+        // Get the base URL from the current page
+        const baseUrl = window.location.pathname.split('/').slice(0, -2).join('/') || '';
+        
+        // Try multiple URL variations with proper base path
+        const urls = [
+          `${baseUrl}/team/${authorSlug}/`,
+          `${baseUrl}/team/${authorSlug}`,
+          `${baseUrl}/team/${authorSlug}.html`,
+          `/team/${authorSlug}/`,  // fallback without base
+          `/team/${authorSlug}`    // fallback without base
+        ];
+        
+        console.log('Checking URLs:', urls);
+        
+        for (const url of urls) {
+          const response = await fetch(url, { 
+            method: 'HEAD',
+            cache: 'no-cache'
+          });
+          console.log(`URL ${url}: ${response.status}`);
+          if (response.ok) {
+            return { exists: true, url: url };
+          }
+        }
+        return { exists: false, url: null };
       } catch (error) {
-        return false;
+        console.log('Error checking author page:', error);
+        return { exists: false, url: null };
       }
     }
 
+    // Function to create author slug (matching your filename format)
+    function createAuthorSlug(authorName) {
+      return authorName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')           // Replace spaces with hyphens
+        .replace(/[^a-z0-9-]/g, '')     // Remove special characters except hyphens
+        .replace(/-+/g, '-')            // Replace multiple hyphens with single
+        .replace(/^-+|-+$/g, '');       // Remove leading/trailing hyphens
+    }
+
     // Function to handle author link clicks
-    async function handleAuthorClick(event, authorName) {
+    async function handleAuthorClick(event, authorName, authorSlug = null) {
       event.preventDefault();
       
-      const authorSlug = authorName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      console.log('Clicked author:', authorName);
+      
+      // Use provided slug or generate one
+      const slug = authorSlug || createAuthorSlug(authorName);
+      console.log('Using slug:', slug);
       
       // Check if author page exists
-      const pageExists = await authorPageExists(authorSlug);
+      const pageCheck = await authorPageExists(slug);
+      console.log('Page check result:', pageCheck);
       
-      if (pageExists) {
+      if (pageCheck.exists) {
         // Navigate to the author's team page
-        window.location.href = `/team/${authorSlug}/`;
+        console.log('Navigating to team page:', pageCheck.url);
+        window.location.href = pageCheck.url;
       } else {
         // Navigate to research page with filter
-        window.location.hash = `author=${encodeURIComponent(authorSlug)}`;
+        console.log('No team page found, filtering research');
+        window.location.hash = `author=${encodeURIComponent(slug)}`;
         filterByAuthor(authorName);
       }
     }
 
     function toggleAllPosts() {
-      const visibleCards = document.querySelectorAll('.blog-card:not(.hidden):not(.author-hidden)');
       const seeAllContainer = document.getElementById('see-all-container');
       const showLessContainer = document.getElementById('show-less-container');
 
@@ -251,7 +292,8 @@
       document.querySelectorAll('.author-filter-link').forEach(link => {
         link.addEventListener('click', function(event) {
           const authorName = this.dataset.author || this.textContent.trim();
-          handleAuthorClick(event, authorName);
+          const authorSlug = this.dataset.authorSlug;  // Get the pre-computed slug
+          handleAuthorClick(event, authorName, authorSlug);
         });
       });
     }
@@ -268,9 +310,15 @@
       } else {
         // Initialize "See All" button visibility
         const allCards = document.querySelectorAll('.blog-card');
+        console.log('Total cards found:', allCards.length);
         if (allCards.length > 4) {
-          document.getElementById('see-all-container').classList.remove('hidden');
-          document.getElementById('see-all-btn').classList.remove('hidden');
+          const seeAllContainer = document.getElementById('see-all-container');
+          const seeAllBtn = document.getElementById('see-all-btn');
+          console.log('Showing See All button');
+          seeAllContainer.classList.remove('hidden');
+          if (seeAllBtn) {
+            seeAllBtn.classList.remove('hidden');
+          }
         }
       }
     });

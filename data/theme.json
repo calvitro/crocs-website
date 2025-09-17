@@ -7,8 +7,8 @@
         "border": "#819D88",
         "light": "#AABDAE",
         "dark": "#014421",
-        "accent": "#DDE5DF",
-        "highlight": "#BAC0C8",
+        "accent": "#dee4df",
+        "highlight": "#AABDAE",
         "highlight_light": "#DDE5DF"
       },
       "text_color": {
@@ -22,7 +22,7 @@
         "primary": "#fff",
         "body": "#1c1c1c",
         "border": "#819D88",
-        "light": "#326141",
+        "light": "#819D88",
         "accent": "#819D88",
         "dark": "#597F64"
       },

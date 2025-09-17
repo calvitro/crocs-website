@@ -18,7 +18,7 @@
     @apply rounded focus:border-primary focus:ring-0;
   }
   button {
-    @apply rounded bg-primary dark:bg-darkmode-primary text-light dark:text-darkmode-light hover:bg-primary dark:hover:bg-darkmode-primary;
+    @apply rounded bg-primary dark:bg-darkmode-primary text-light dark:text-darkmode-dark hover:bg-primary dark:hover:bg-darkmode-primary;
   }
 }
 

@@ -1,5 +1,5 @@
 ---
-title: "Our Research"
+title: "All Research"
 meta_title: ""
 description: "this is meta description"
 ---

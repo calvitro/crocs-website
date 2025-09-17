@@ -5,8 +5,7 @@ meta_title: ""
 email: amunderloh@unomaha.edu
 description: "Allison Munderloh"
 image: "/images/altlogo.png"
-categories: ["Topic", "Event Security"]
-tags: ["researcher", "gradstudent"]
+categories: ["Terrorism", "Event Security", "Gun Violence"]
 draft: false
 social:
   - name: CV
@@ -15,11 +14,11 @@ social:
 
   - name: google scholar
     icon: fas fa-graduation-cap
-    link: https://scholar.google.com/
+    link: https://scholar.google.com/citations?hl=en&user=2dW9HusAAAAJ
 
   - name: linkedin
     icon: fab fa-linkedin-in
-    link: https://www.linkedin.com/in/allison-munderloh-18204234a/
+    link: linkedin.com/in/allison-munderloh-18204234a
   
   - name: email
     icon: fas fa-envelope
@@ -27,19 +26,11 @@ social:
 
   - name: ORCiD
     icon: fab fa-orcid
-    link: https://orcid.org/
+    link: https://orcid.org/0009-0007-9889-3415
 
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
-
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Graduate Research Assistant
+
 <!--more-->
+
+Allison Munderloh is a first year MA student in the Criminology and Criminal Justice program at the University of Nebraska at Omaha and a Graduate Research Assistant at the National Counterterrorism Innovation, Technology, and Education Center (NCITE).

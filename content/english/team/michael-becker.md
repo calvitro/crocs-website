@@ -4,9 +4,8 @@ role: "research associate"
 meta_title: ""
 email: mbecker26@unomaha.edu
 description: "Michael Becker"
-image: "/images/altlogo.png"
+image: "/images/Becker_Photo.png"
 categories: ["Extremism", "Theory", "Quantitative Methods"]
-tags: ["researcher", "researchassociate"]
 draft: false
 social:
   - name: CV
@@ -15,7 +14,7 @@ social:
 
   - name: google scholar
     icon: fas fa-graduation-cap
-    link: https://scholar.google.com/
+    link: https://scholar.google.com/citations?user=TVaP6KYAAAAJ&hl=en 
 
   - name: linkedin
     icon: fab fa-linkedin-in
@@ -28,10 +27,6 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-0168-1499
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/M_H_Becker
 
   - name: GitHub
     icon: fab fa-github

@@ -1,0 +1,312 @@
+{{ define "main" }}
+  <section class="section pt-7">
+    <div class="container">
+      <div class="row justify-center">
+        <article class="lg:col-10">
+          {{ $image:= .Params.image }}
+          {{ if $image }}
+            <div class="mb-10">
+              {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "mb-6") }}
+            </div>
+          {{ end }}
+          <h1 class="h2 mb-4">
+            {{ .Title }}
+          </h1>
+          <ul class="mb-4">
+<!-- Authors Section -->
+{{ $authors := .Params.authors }}
+{{ $singleAuthor := .Params.author }}
+{{ $allAuthors := slice }}
+
+{{ if $authors }}
+  {{ $allAuthors = $authors }}
+{{ else if $singleAuthor }}
+  {{ $allAuthors = slice $singleAuthor }}
+{{ end }}
+
+{{ if $allAuthors }}
+  <li class="mr-4 inline-block">
+    <i class="fa-regular fa-circle-user mr-2"></i>
+    {{ range $i, $author := $allAuthors }}
+      {{ $authorSlug := $author | lower | replaceRE "\\s+" "-" | replaceRE "[^a-z0-9-]" "" }}
+      <a href="javascript:void(0)" 
+         class="author-filter-link" 
+         data-author="{{ $author }}"
+         data-author-slug="{{ $authorSlug }}">
+        {{ $author }}
+      </a>
+      {{ if ne $i (sub (len $allAuthors) 1) }}, {{ end }}
+    {{ end }}
+  </li>
+{{ end }}
+<script>
+    // Function to check if an author page exists
+    async function authorPageExists(authorSlug) {
+      try {
+        // Get the base URL from the current page - need to go back to the site root
+        const currentPath = window.location.pathname;
+        let baseUrl;
+        
+        if (currentPath.includes('/reports/')) {
+          // We're in a report page, get the base before /report/
+          baseUrl = currentPath.split('/reports/')[0];
+        } else {
+          // Fallback - try to get base from path structure
+          const pathParts = currentPath.split('/').filter(part => part);
+          if (pathParts.length >= 2) {
+            baseUrl = '/' + pathParts.slice(0, -1).join('/');
+          } else {
+            baseUrl = '';
+          }
+        }
+        
+        // Try multiple URL variations with proper base path
+        const urls = [
+          `${baseUrl}/team/${authorSlug}/`,
+          `${baseUrl}/team/${authorSlug}`,
+          `${baseUrl}/team/${authorSlug}.html`,
+          `/team/${authorSlug}/`,  // fallback without base
+          `/team/${authorSlug}`    // fallback without base
+        ];
+        
+        console.log('Base URL:', baseUrl);
+        console.log('Checking URLs:', urls);
+        
+        for (const url of urls) {
+          const response = await fetch(url, { 
+            method: 'HEAD',
+            cache: 'no-cache'
+          });
+          console.log(`URL ${url}: ${response.status}`);
+          if (response.ok) {
+            return { exists: true, url: url };
+          }
+        }
+        return { exists: false, url: null };
+      } catch (error) {
+        console.log('Error checking author page:', error);
+        return { exists: false, url: null };
+      }
+    }
+
+    // Function to create author slug (matching your filename format)
+    function createAuthorSlug(authorName) {
+      return authorName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')           // Replace spaces with hyphens
+        .replace(/[^a-z0-9-]/g, '')     // Remove special characters except hyphens
+        .replace(/-+/g, '-')            // Replace multiple hyphens with single
+        .replace(/^-+|-+$/g, '');       // Remove leading/trailing hyphens
+    }
+
+    // Function to handle author link clicks
+    async function handleAuthorClick(event, authorName, authorSlug = null) {
+      event.preventDefault();
+      
+      console.log('Clicked author:', authorName);
+      
+      // Use provided slug or generate one
+      const slug = authorSlug || createAuthorSlug(authorName);
+      console.log('Using slug:', slug);
+      
+      // Check if author page exists
+      const pageCheck = await authorPageExists(slug);
+      console.log('Page check result:', pageCheck);
+      
+      if (pageCheck.exists) {
+        // Navigate to the author's team page
+        console.log('Navigating to team page:', pageCheck.url);
+        window.location.href = pageCheck.url;
+      } else {
+        // Navigate to research page with filter
+        console.log('No team page found, filtering research');
+        // Get the research page URL - go back to reports page
+        const currentPath = window.location.pathname;
+        let researchUrl;
+
+        if (currentPath.includes('/reports/')) {
+          // We're in a reports page, go back to reports listing
+          researchUrl = currentPath.split('/reports/')[0] + '/reports/';
+        } else {
+          // Fallback - try to construct the path
+          const pathParts = currentPath.split('/').filter(part => part);
+          if (pathParts.length >= 2) {
+            researchUrl = '/' + pathParts.slice(0, -1).join('/') + '/';
+          } else {
+            researchUrl = '/reports/'; // Final fallback
+          }
+        }
+        
+        console.log('Research URL:', researchUrl);
+        window.location.href = `${researchUrl}#author=${encodeURIComponent(slug)}`;
+      }
+    }
+
+    // Attach event listeners to author links
+    function attachAuthorListeners() {
+      document.querySelectorAll('.author-filter-link').forEach(link => {
+        link.addEventListener('click', function(event) {
+          const authorName = this.dataset.author || this.textContent.trim();
+          const authorSlug = this.dataset.authorSlug;  // Get the pre-computed slug
+          handleAuthorClick(event, authorName, authorSlug);
+        });
+      });
+    }
+
+    // Initialize when page loads
+    window.addEventListener('load', function() {
+      attachAuthorListeners();
+    });
+  </script>
+            <!-- categories Section -->
+            {{ $categories:= .Params.categories }}
+            {{ if $categories }}
+              <li class="mr-4 inline-block">
+                <i class="fa-regular fa-folder mr-2"></i>
+                {{ range $i,$p:= $categories }}
+                  <a
+                    href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/"
+                    class=""
+                    >{{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}
+                      {{ "," }}
+                    {{ end }}
+                  </a>
+                {{ end }}
+              </li>
+            {{ end }}
+            <!-- Publish Date -->
+            <li class="mr-4 inline-block">
+              <i class="fa-regular fa-clock mr-2"></i>
+              {{ time.Format "January 2006" .PublishDate }}
+            </li>
+          </ul>
+          <div class="content mb-10">
+            {{ partial "toc.html" (dict "Class" "blog" "Collapsed" false "TableOfContents" .TableOfContents ) }}
+            {{ .Content }}
+          </div>
+          <!-- Paper Link -->
+          {{ with .Params.paper_link }}
+            <div class="mb-8 p-6 bg-light dark:bg-darkmode-light rounded-lg border border-border dark:border-darkmode-border">
+              <div class="flex items-center">
+                <i class="fas fa-file-lines text-2xl mr-4"></i>
+                <div>
+                  <h5 class="mb-2">{{ T "full_paper" | default "Follow link below for the paper. Questions? Contact the authors." }}</h5>
+                  <a 
+                    href="{{ . }}" 
+                    class="btn btn-primary btn-sm"
+                    {{ if strings.HasPrefix . "http" }}
+                      target="_blank" rel="noopener"
+                    {{ end }}>
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                    {{ T "access_paper" | default "DOI" }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+          
+          <div class="row items-start justify-between">
+            {{ $tags:= .Params.tags }}
+            {{ if $tags }}
+              <div class="lg:col-6 mb-10 flex items-center lg:mb-0">
+                <h5 class="mr-3">{{ T "tags" }} :</h5>
+                <ul>
+                  {{ range $i,$p:= $tags }}
+                    <li class="inline-block">
+                      <a
+                        class="bg-light hover:bg-primary dark:bg-darkmode-light dark:hover:bg-darkmode-primary dark:hover:text-text-dark m-1 block rounded px-3 py-1 hover:text-white"
+                        href="{{ `tags/` | relLangURL }}{{ . | urlize | lower }}/">
+                        {{ . | humanize }}
+                      </a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </div>
+            {{ end }}
+            <div class="lg:col-6 flex items-center lg:justify-end">
+              <h5>{{ T "share" }} :</h5>
+              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" .Title "Whatsapp" false "Telegram" false "Linkedin" false "Pinterest" false "Tumblr" false "Vk" false "Reddit" false) }}
+            </div>
+          </div>
+
+<!-- Related posts -->
+      {{ $currentPage := . }}
+      {{ $currentTitle := .Title }}
+      {{ $relatedPosts := slice }}
+      {{ $seenTitles := slice $currentTitle }}
+      
+      <!-- Get current page metadata -->
+      {{ $currentCategories := .Params.categories }}
+      {{ $currentAuthors := .Params.authors }}
+      {{ $currentSingleAuthor := .Params.author }}
+      {{ $currentTags := .Params.tags }}
+      
+      <!-- Combine single author with authors array -->
+      {{ $allCurrentAuthors := slice }}
+      {{ if $currentAuthors }}
+        {{ if reflect.IsSlice $currentAuthors }}
+          {{ $allCurrentAuthors = $currentAuthors }}
+        {{ else }}
+          {{ $allCurrentAuthors = slice $currentAuthors }}
+        {{ end }}
+      {{ end }}
+      {{ if $currentSingleAuthor }}
+        {{ $allCurrentAuthors = $allCurrentAuthors | append $currentSingleAuthor }}
+      {{ end }}
+      {{ $allCurrentAuthors = uniq $allCurrentAuthors }}
+      
+      <!-- 1. First priority: Posts with matching categories -->
+      {{ if $currentCategories }}
+        {{ range site.RegularPages }}
+          {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.categories }}
+            {{ $hasMatchingCategory := false }}
+            {{ range .Params.categories }}
+              {{ if in $currentCategories . }}
+                {{ $hasMatchingCategory = true }}
+              {{ end }}
+            {{ end }}
+            {{ if $hasMatchingCategory }}
+              {{ $relatedPosts = $relatedPosts | append . }}
+              {{ $seenTitles = $seenTitles | append .Title }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <!-- 3. Third priority: Posts with matching tags (if we still need more) -->
+      {{ if and (lt (len $relatedPosts) 10) $currentTags }}
+        {{ range site.RegularPages }}
+          {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.tags }}
+            {{ $hasMatchingTag := false }}
+            {{ range .Params.tags }}
+              {{ if in $currentTags . }}
+                {{ $hasMatchingTag = true }}
+              {{ end }}
+            {{ end }}
+            {{ if $hasMatchingTag }}
+              {{ $relatedPosts = $relatedPosts | append . }}
+              {{ $seenTitles = $seenTitles | append .Title }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <!-- Limit to 3 posts and shuffle -->
+      {{ $relatedPosts = $relatedPosts | first 10 | shuffle | first 3 }}
+      
+      {{ with $relatedPosts }}
+        <div class="section pb-0">
+          <h2 class="h3 mb-12">{{ T "related_posts" }}</h2>
+          <div class="row">
+            {{ range . }}
+              <div class="lg:col-4 md:col-6 mb-14">
+                {{ partial "components/blog-card" . }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

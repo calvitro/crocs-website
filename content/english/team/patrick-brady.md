@@ -6,7 +6,6 @@ email: pbrady@unomaha.edu
 description: "patrick brady"
 image: "/images/altlogo.png"
 categories: ["Topic", "Terrorism"]
-tags: ["researcher", "gradstudent"]
 draft: false
 social:
   - name: CV
@@ -28,10 +27,6 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github

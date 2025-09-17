@@ -1,7 +1,7 @@
 ---
 enable: true
 title: "Project Highlights"
-description: "A snapshot of some of our exciting work"
+description: "A snapshot of some of our recent work"
 
 # Projects
 projects:

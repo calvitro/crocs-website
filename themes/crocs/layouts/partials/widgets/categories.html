@@ -8,7 +8,7 @@
           {{ range $name, $items := site.Taxonomies.categories }}
             <li>
               <a
-                class="hover:text-primary dark:hover:text-darkmode-primary {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
+                class="hover:text-primary dark:hover:text-darkmode-text-light {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
                   active
                 {{ end }} flex justify-between"
                 href="{{ .Page.RelPermalink }}">

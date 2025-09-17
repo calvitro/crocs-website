@@ -39,13 +39,19 @@
       {{ $authorName := .Title }}
       {{ $authorPosts := slice }}
       
-      <!-- Check for posts with single author field -->
-      {{ $singleAuthorPosts := where site.RegularPages "Params.author" "==" $authorName }}
-      {{ $authorPosts = $authorPosts | append $singleAuthorPosts }}
+      <!-- Define which sections to include -->
+      {{ $allowedSections := slice "research" "blog" }}
       
-      <!-- Check for posts with multiple authors field -->
+      <!-- Check for posts with single author field in allowed sections -->
+      {{ range $allowedSections }}
+        {{ $section := . }}
+        {{ $sectionPosts := where (where site.RegularPages "Section" "==" $section) "Params.author" "==" $authorName }}
+        {{ $authorPosts = $authorPosts | append $sectionPosts }}
+      {{ end }}
+      
+      <!-- Check for posts with multiple authors field in allowed sections -->
       {{ range site.RegularPages }}
-        {{ if .Params.authors }}
+        {{ if and (in $allowedSections .Section) .Params.authors }}
           {{ if reflect.IsSlice .Params.authors }}
             {{ if in .Params.authors $authorName }}
               {{ $authorPosts = $authorPosts | append . }}

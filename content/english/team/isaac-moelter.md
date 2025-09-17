@@ -6,7 +6,6 @@ email: imoelter@unomaha.edu
 description: "Isaac Moelter"
 image: "/images/altlogo.png"
 categories: ["Extremism", "Corrections"]
-tags: ["researcher", "gradstudent"]
 draft: false
 social:
   - name: CV
@@ -28,10 +27,6 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0009-0009-3583-6696
-
-  - name: Twitter
-    icon: fab fa-twitter
-    link: https://x.com/
 
   - name: GitHub
     icon: fab fa-github
