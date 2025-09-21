@@ -5,27 +5,27 @@ description: "A snapshot of some of our recent work"
 
 # Projects
 projects:
-  - title: "Sentencing terrorist leaders and their followers: Evidence from Islamic State defendants in U.S. Federal courts, 2014–2024"
+  - title: "Event-related threats in the United States: Analysis of plots and incidents from 1970–2024"
     designation: ""
-    avatar: "/images/isisborder.png"
-    description: "Sentencing of ISIS-affiliated defendants in U.S. federal courts."
-    link: "research/vitroetal_2025/"
-    categories: ["ISIS", "Leadership", "Terrorism"]
-    authors: ["Callie Vitro", "Camden Carmichael", "Austin Doctor", "Seamus Hughes"]
-  - title: "Screening for insider threats in US law enforcement: A national sample of department policies and practices plain language summary"
+    avatar: "/images/eventborder.png"
+    description: "Research on event-related threats in the United States"
+    link: "reports/nguyenetal_2025/"
+    categories: ["Event Security"]
+    authors: ["Tin Nguyen", "Erin Kearns", "Callie Vitro", "Sarah Schappert", "Cynthia Kennedy", "Allison Munderloh"]
+  - title: "Dismantling terrorism through prosecutions: A case study of Atomwaffen Division"
     designation: ""
-    avatar: "/images/image-placeholder.png"
-    description: "Research on insider threats in U.S. Law Enforcement"
-    link: "research/kearnsetal_2024/"
-    categories: ["Police"]
-    authors: ["Erin Kearns", "Sadaf Hashimi", "Jessica Huff", "Justin Nix", "Natalie Cotton"]
-  - title: "Examining incel subculture on Reddit"
+    avatar: "/images/atomwaffenborder.png"
+    description: "The current state of U.S. federal cases against the Atomwaffen Division"
+    link: "reports/hughesetal_2025-3/"
+    categories: ["Atomwaffen", "Courts"]
+    authors: ["Seamus Hughes", "Brooke Buxton", "Camden Carmichael", "Mackenzie Harms"]
+  - title: "Investigating terrorist use of improvised explosive devices in the United States: Evidence from US federal court cases, 2009–2024"
     designation: ""
-    avatar: "/images/image-placeholder.png"
-    description: Research examining involuntary celibate subcultures on Reddit
-    link: "research/helmetal_2022/"
-    categories: ["Incels", "Social Media"]
-    authors: ["Brenna Helm", "Ryan Scrivens", "Thomas Holt", "Steve Chermak", "Richard Frank"]
+    avatar: "/images/iedborder2.png"
+    description: Understanding terrorist use of improvised explosive devices (IEDs) in the United States.
+    link: "manuscripts/bendadoctor_2025/"
+    categories: ["IEDs", "Terrorism", "Courts"]
+    authors: ["Angie Benda", "Austin Doctor"]
 
 
 # don't create a separate page
