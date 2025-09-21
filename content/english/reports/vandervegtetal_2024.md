@@ -3,7 +3,7 @@ title: "The relationship between language use and conspiracy beliefs"
 meta_title: ""
 description: "this is meta description"
 date: 2024-05-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/computerborder.png"
 categories: ["Conspiracy Theories", "Online"]
 authors: ["Isabelle van der Vegt", "Bettina Rottweiler", "Paul Gill"]
 tags: ["report", "research"]

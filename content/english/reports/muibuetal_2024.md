@@ -3,7 +3,7 @@ title: "Vicarious trauma in counterterrorism practitioners"
 meta_title: ""
 description: "this is meta description"
 date: 2025-02-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/traumaborder.png"
 categories: ["Vicarious Trauma"]
 authors: ["Daisy Muibu", "Joseph Young", "Michael Becker", "Sarah Lynch", "Ethan Ferguson", "Lindsay Barclay"]
 tags: ["report", "research"]

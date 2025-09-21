@@ -3,7 +3,7 @@ title: "Research challenges in combating terrorist use of explosives in the Unit
 meta_title: ""
 description: "this is meta description"
 date: 2024-07-04T05:00:00Z
-image: "/images/iedborder.png"
+image: "/images/iedborder2.png"
 categories: ["IEDs", "UxS", "Emerging Technology"]
 authors: ["Austin Doctor", "Sam Hunter", "Gina Ligon", "Gary Wes Carter", "Dan Polanski", "Jimmie Oxley"]
 tags: ["report", "research"]

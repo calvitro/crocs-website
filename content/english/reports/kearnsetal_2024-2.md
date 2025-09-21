@@ -3,7 +3,7 @@ title: "Review of publicly accessible Behavioral Threat Assessment and Managemen
 meta_title: ""
 description: "this is meta description"
 date: 2024-09-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/btamborder.png"
 categories: ["BTAM", "Risk Assessment"]
 authors: ["Erin Kearns", "Callie Vitro", "Sarah Schappert"]
 tags: ["report", "research"]

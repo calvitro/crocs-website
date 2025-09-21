@@ -3,7 +3,7 @@ title: "Event-related threats in the United States: Analysis of plots and incide
 meta_title: ""
 description: "this is meta description"
 date: 2025-08-04T05:00:00Z
-image: "/images/eventborder.jpg"
+image: "/images/eventborder.png"
 categories: ["Event Security"]
 authors: ["Tin Nguyen", "Erin Kearns", "Callie Vitro", "Sarah Schappert", "Cynthia Kennedy", "Allison Munderloh"]
 tags: ["report", "research"]

@@ -3,7 +3,7 @@ title: "Investigating terrorist use of improvised explosive devices in the Unite
 meta_title: ""
 description: "this is meta description"
 date: 2025-06-04T05:00:00Z
-image: "/images/iedborder.png"
+image: "/images/iedborder2.png"
 categories: ["IEDs", "Terrorism", "Courts"]
 authors: ["Angie Benda", "Austin Doctor"]
 tags: ["manuscript", "research"]
@@ -13,7 +13,7 @@ paper_link: https://www.jstor.org/stable/27389739?casa_token=Hr1wNsaBduoAAAAA%3A
 
 Understanding terrorist use of improvised explosive devices (IEDs) in the United States.
 
-<!---more--->
+<!--more-->
 
 ## Abstract
 

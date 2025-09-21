@@ -3,7 +3,7 @@ title: "Event security: Vision-setting, planning, and implementation considerati
 meta_title: ""
 description: "this is meta description"
 date: 2025-02-04T05:00:00Z
-image: "/images/eventborder.jpg"
+image: "/images/eventborder.png"
 categories: ["Event Security"]
 authors: ["Tin Nguyen", "Erin Kearns"]
 tags: ["report", "research"]

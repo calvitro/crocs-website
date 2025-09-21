@@ -3,7 +3,7 @@ title: "Peer support program evaluability assessment"
 meta_title: ""
 description: "this is meta description"
 date: 2025-02-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/peerborder.png"
 categories: ["Peer Support"]
 authors: ["Lindsay Barclay", "Daisy Muibu", "Joseph Young", "Susan Campbell", "Michael Becker", "Sarah Lynch", "Ethan Ferguson", "Willow Kreutzer"]
 tags: ["report", "research"]
