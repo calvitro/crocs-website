@@ -5,7 +5,7 @@ meta_title: ""
 email: bhelm@unomaha.edu
 description: "Brenna Helm"
 image: "/images/altlogo.png"
-categories: ["Extremism", "Incels", "Online Subcultures"]
+categories: ["Extremism", "Incels", "Online", "Youth Mobilization"]
 draft: false
 social:
   - name: CV

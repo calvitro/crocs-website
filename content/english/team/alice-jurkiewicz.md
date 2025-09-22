@@ -5,12 +5,12 @@ meta_title: ""
 email: ajurkiewicz@unomaha.edu
 description: "Alice Jurkiewicz"
 image: "/images/altlogo.png"
-categories: ["Hate Crimes", "Extremism"]
+categories: ["Hate Crimes", "Youth Mobilization", "Extremism", "Online"]
 draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://workspace.google.com/products/drive/
+    link: https://docs.google.com/document/d/1-qOleSrkgeyptruy_xglRiv-FECleVdv/edit?usp=sharing&ouid=101590372173032939984&rtpof=true&sd=true
 
   - name: google scholar
     icon: fas fa-graduation-cap
@@ -26,15 +26,9 @@ social:
 
   - name: ORCiD
     icon: fab fa-orcid
-    link: https://orcid.org/
+    link: https://orcid.org/0009-0005-4652-8550
 
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Graduate Research Assistant
 <!--more-->
+Alice Jurkiewicz is a Graduate Research Assistant at the National Counterterrorism Innovation, Technology, and Education Center (NCITE) and a PhD student in the School of Criminology and Criminal Justice at the University of Nebraska at Omaha (UNO). Her research interests include Anti-Asian Hate Crimes, Online Violent Extremism, Right-Wing Extremism, Human Rights, and Foreign Policy. 

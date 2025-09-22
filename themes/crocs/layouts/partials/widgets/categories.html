@@ -3,14 +3,14 @@
   {{ if not (eq (len site.Taxonomies.categories) 0) }}
     <div class="mb-8">
       <h5 class="mb-6">{{ T "categories" }}</h5>
-      <div class="bg-accent dark:bg-darkmode-light rounded p-8">
+      <div class="outline outline-2 outline-theme_color:light dark:outline outline-2 outline-theme_color:light rounded p-8">
         <ul class="space-y-4">
           {{ range $name, $items := site.Taxonomies.categories }}
-            <li>
+            <li class="inline-block">
               <a
-                class="hover:text-primary dark:hover:text-darkmode-text-light {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
+                class="hover:bg-primary dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
                   active
-                {{ end }} flex justify-between"
+                {{ end }} m-2 block rounded bg-white px-2 py-1 hover:text-white"
                 href="{{ .Page.RelPermalink }}">
                 {{ .Page.Title }} <span>( {{ len $items }} )</span>
               </a>

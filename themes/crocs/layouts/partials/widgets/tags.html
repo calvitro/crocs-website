@@ -3,7 +3,7 @@
   {{ if not (eq (len site.Taxonomies.tags) 0) }}
     <div class="mb-8">
       <h5 class="mb-6">{{ T "tags" }}</h5>
-      <div class="bg-accent dark:bg-darkmode-light rounded p-6">
+      <div class="outline outline-2 outline-theme_color:light dark:outline outline-2 outline-theme_color:light rounded p-8">
         <ul>
           {{ range $name, $items := site.Taxonomies.tags }}
             <li class="inline-block">

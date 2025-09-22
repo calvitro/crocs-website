@@ -1,0 +1,66 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+  <section class="section">
+    <div class="container">
+      <div class="row gx-5">
+        <!-- Main content area -->
+        <div class="lg:col-8">
+          <!-- Category title -->
+          <h1 class="text-left text-2xl font-semibold mb-8 text-[#444444] text-darkmode-text-light">
+            Category: {{ .Title }}
+          </h1>
+          
+          <!-- Filter pages to only show from research and team sections -->
+          {{ $filteredPages := where .Pages "Section" "in" (slice "research" "team") }}
+          
+          {{ if gt (len $filteredPages) 0 }}
+            <!-- Separate research papers and team members -->
+            {{ $researchPages := where $filteredPages "Section" "eq" "research" }}
+            {{ $teamPages := where $filteredPages "Section" "eq" "team" }}
+            
+            <!-- Research Papers Section -->
+            {{ if gt (len $researchPages) 0 }}
+              <h2 class="text-left text-xl font-semibold mb-6 text-[#444444] text-darkmode-text-light">Research Papers</h2>
+              <div class="row mb-12">
+                {{ range $researchPages }}
+                  <div class="md:col-6 mb-14">
+                    {{ partial "components/blog-card" . }}
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+            
+            <!-- Team Members Section -->
+            {{ if gt (len $teamPages) 0 }}
+              <h2 class="text-left text-xl font-semibold mb-6 text-[#444444] text-darkmode-text-light">Team Members</h2>
+              <div class="row pb-8">
+                {{ range $teamPages }}
+                  <div class="md:col-6 lg:col-4 mb-12">
+                    {{ partial "components/author-card" . }}
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+            
+          {{ else }}
+            <div class="text-center py-16">
+              <h3 class="h4 mb-4">No Content Found</h3>
+              <p class="text-text-light dark:text-darkmode-text-light mb-6">No research papers or team members found in this category.</p>
+              <a href="{{ `categories` | relLangURL }}" class="btn btn-primary">
+                ← View All Categories
+              </a>
+            </div>
+          {{ end }}
+        </div>
+        
+        <!-- sidebar -->
+        <div class="lg:col-4">
+          <!-- widget -->
+          {{ $widget:= site.Params.widgets.sidebar }}
+          {{ partialCached "widgets/widget-wrapper" ( dict "Widgets" $widget "Scope" . ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

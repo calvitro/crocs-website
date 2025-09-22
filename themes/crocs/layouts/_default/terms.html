@@ -2,24 +2,43 @@
   {{ partial "page-header" . }}
 
 
-  <section class="section">
+<section class="section">
     <div class="container">
       <ul class="text-center">
-        {{/* categories */}}
-        {{ if eq .Permalink (`categories/` | absLangURL) }}
-          {{ range site.Taxonomies.categories.ByCount }}
-            <li class="m-3 inline-block">
-              <a
-                href="{{ .Page.Permalink }}"
-                class="bg-light text-text-dark dark:bg-darkmode-light dark:text-darkmode-text-light block rounded px-4 py-2 text-xl">
-                {{ .Page.Title }}
-                <span class="bg-body dark:bg-darkmode-body ml-2 rounded px-2">
-                  {{ .Count }}
-                </span>
-              </a>
-            </li>
-          {{ end }}
-        {{ end }}
+
+<section class="section">
+    <div class="container">
+      <ul class="text-center">
+       
+<section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          <h1 class="h2 mb-8 text-center">All Categories</h1>
+          <ul class="text-center">
+            {{/* categories */}}
+            {{ if eq .Permalink (`categories/` | absLangURL) }}
+              {{ range site.Taxonomies.categories.ByCount }}
+                {{ $filteredItems := where .Pages "Section" "in" (slice "research" "team") }}
+                {{ if gt (len $filteredItems) 0 }}
+                  <li class="m-3 inline-block">
+                    <a
+                      href="{{ .Page.Permalink }}"
+                      class="bg-theme-light hover:bg-primary hover:text-white text-dark dark:bg-darkmode-theme-light dark:text-darkmode-text dark:hover:bg-darkmode-primary dark:hover:text-darkmode-text-light transition-all duration-300 block rounded px-4 py-2 text-lg">
+                      {{ .Page.Title }}
+                      <span class="bg-body dark:bg-darkmode-body ml-2 rounded px-2 text-sm">
+                        {{ len $filteredItems }}
+                      </span>
+                    </a>
+                  </li>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+</section>
         {{/* tags */}}
         {{ if eq .Permalink (`tags/` | absLangURL) }}
           {{ range site.Taxonomies.tags.ByCount }}
