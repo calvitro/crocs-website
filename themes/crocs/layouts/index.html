@@ -7,9 +7,9 @@
       <div class="row justify-center">
 
         <div class="col-13 mb-4">
-    {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto !max-w-[300px] md:!max-w-[400px] lg:!max-w-[500px] dark:hidden block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "1600x" "DisplayS" "800x") }}
+    {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto !max-w-[200px] md:!max-w-[400px] lg:!max-w-[500px] dark:hidden block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "1600x" "DisplayS" "800x") }}
     {{ if .dark_image }}
-    {{ partial "image" (dict "Src" .dark_image "Alt" "Dark mode banner" "Loading" "eager" "Class" "mx-auto !max-w-[300px] md:!max-w-[400px] lg:!max-w-[500px] hidden dark:block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "1600x" "DisplayS" "800x") }}
+    {{ partial "image" (dict "Src" .dark_image "Alt" "Dark mode banner" "Loading" "eager" "Class" "mx-auto !max-w-[200px] md:!max-w-[400px] lg:!max-w-[500px] hidden dark:block" "DisplayXL" "1600x" "DisplayL" "1600x" "DisplayMD" "1600x" "DisplayS" "800x") }}
     {{ end }}
 {{ end }}
   <!-- /Banner -->  

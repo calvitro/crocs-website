@@ -5,7 +5,7 @@ meta_title: ""
 email: camdencarmichael@unomaha.edu
 description: "camden carmichael"
 image: "/images/altlogo.png"
-categories: ["ISIS", "Courts"]
+categories: ["ISIS", "Courts", "Emerging Threats"]
 draft: false
 social:
   - name: CV
@@ -28,14 +28,7 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0009-0009-7336-4917
 
-
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Graduate Research Assistant
 <!--more-->
+Camden Carmichael is a Graduate Research Assistant at the National Counterterrorism Innovation Technology and Education (NCITE) center and an M.A. Student in the School of Criminology and Criminal Justice. His research interests include federal courts, ISIS, and emerging threats. 
