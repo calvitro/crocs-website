@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://docs.google.com/document/d/17ZQpsdxDIGS57oVwNDXvLoRhbmIer_Og/edit
+    link: <a href="/documents/Kearns-CV.pdf" target="_blank" rel="noopener noreferrer">
 
   - name: google scholar
     icon: fas fa-graduation-cap

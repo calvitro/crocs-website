@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://workspace.google.com/products/drive/
+    link: "/crocs-website/documents/Becker.CV.September.2025.pdf"
 
   - name: google scholar
     icon: fas fa-graduation-cap
