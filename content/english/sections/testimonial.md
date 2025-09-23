@@ -27,7 +27,6 @@ projects:
     categories: ["IEDs", "Terrorism", "Courts"]
     authors: ["Angie Benda", "Austin Doctor"]
 
-
 # don't create a separate page
 build:
   render: "never"

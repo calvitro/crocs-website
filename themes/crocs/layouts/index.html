@@ -78,7 +78,7 @@
             <div class="col-12">
               <div class="row justify-center">
                 {{ range .Params.projects }}
-                  <div class="lg:col-4 md:col-6 mb-8">
+                  <div class="lg:col-4 md:col-8 mb-8">
                     {{ partial "components/blog-card.html" (dict "Title" .title "Permalink" .link "Summary" .description "Params" (dict "image" .avatar "authors" .authors "categories" .categories)) }}
                   </div>
                 {{ end }}

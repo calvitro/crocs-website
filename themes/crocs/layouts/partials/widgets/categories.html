@@ -6,15 +6,18 @@
       <div class="outline outline-2 outline-theme_color:light dark:outline outline-2 outline-theme_color:light rounded p-8">
         <ul class="space-y-4">
           {{ range $name, $items := site.Taxonomies.categories }}
-            <li class="inline-block">
-              <a
-                class="hover:bg-primary dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
-                  active
-                {{ end }} m-2 block rounded bg-white px-2 py-1 hover:text-white"
-                href="{{ .Page.RelPermalink }}">
-                {{ .Page.Title }} <span>( {{ len $items }} )</span>
-              </a>
-            </li>
+            {{ $researchItems := where $items "Section" "research" }}
+            {{ if gt (len $researchItems) 0 }}
+              <li class="inline-block">
+                <a
+                  class="hover:bg-primary dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
+                    active
+                  {{ end }} m-2 block rounded bg-white px-2 py-1 hover:text-white"
+                  href="{{ .Page.RelPermalink }}">
+                  {{ .Page.Title }} <span>( {{ len $researchItems }} )</span>
+                </a>
+              </li>
+            {{ end }}
           {{ end }}
         </ul>
       </div>
