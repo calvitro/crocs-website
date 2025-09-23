@@ -4,7 +4,7 @@ role: "co-director"
 meta_title: ""
 email: ekearns@unomaha.edu
 description: "erin kearns"
-image: "/images/altlogo.png"
+image: "/images/Kearns-Photo.png"
 categories: ["Event Security", "SAR", "Media"]
 draft: false
 social:

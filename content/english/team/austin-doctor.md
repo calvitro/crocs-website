@@ -4,7 +4,7 @@ role: "co-director"
 meta_title: ""
 email: adoctor@unomaha.edu
 description: "austin doctor"
-image: "/images/Doctor_Photo.png"
+image: "/images/Doctor-Photo.png"
 categories: ["ISIS", "IEDs", "Leadership", "FTFs", "Courts", "Youth Mobilization"]
 draft: false
 social:

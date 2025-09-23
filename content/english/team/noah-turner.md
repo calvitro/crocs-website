@@ -4,7 +4,7 @@ role: "external affiliate"
 meta_title: ""
 email: turnernd@iu.edu
 description: "Noah Turner"
-image: "/images/Turner-Photo.jpg"
+image: "/images/Turner-Photo.png"
 categories: ["SAR", "Domestic Terrorism", "Theory", "Crime Prevention"]
 draft: false
 social:

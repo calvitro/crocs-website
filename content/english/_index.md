@@ -1,8 +1,6 @@
 ---
 # Banner
 banner:
-  title: "THE CROCS LAB"
-  content: "a lab for criminological research of counterterrorism and security"
   image: "/images/bannerreal.png"
   dark_image: "/images/bannerdark.png"
   maxWidth: 800
@@ -24,7 +22,7 @@ features:
   - title: "OUR RESEARCH"
     image: "/images/mainscreenlower.png"
     dark_image: "/images/mainscreenlower.png"
-    content: "Collectively, our team provides new insight into terrorism offenders and terrorist networks, the prosecution of terrorism and terrorism-related criminal activities, threat assessment and management, and the reentry of terrorism offenders. Our work has been generously funded by xxxxxxx. Recent and ongoing project initiatives have focused on:"
+    content: "Collectively, our team provides new insight into terrorism offenders and terrorist networks, the prosecution of terrorism and terrorism-related criminal activities, threat assessment and management, and the reentry of terrorism offenders. Our work has been generously funded by multiple sources including the Department of Homeland Security. Recent and ongoing project initiatives have focused on:"
     bulletpoints:
       - "Securing public events"
       - "Disrupting transnational organized criminal networks"

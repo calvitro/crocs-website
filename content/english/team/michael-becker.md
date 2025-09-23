@@ -4,7 +4,7 @@ role: "research associate"
 meta_title: ""
 email: mbecker26@unomaha.edu
 description: "Michael Becker"
-image: "/images/Becker_Photo.png"
+image: "/images/Becker-Photo.png"
 categories: ["Extremism", "Theory", "Quantitative Methods"]
 draft: false
 social:

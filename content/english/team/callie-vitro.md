@@ -28,6 +28,11 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0000-0001-6038-9394
 
+  - name: GitHub
+    icon: fab fa-github
+    link: https://github.com/calvitro
+
+
 ---
 Graduate Research Assistant
 

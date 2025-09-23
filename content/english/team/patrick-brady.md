@@ -18,7 +18,7 @@ social:
 
   - name: linkedin
     icon: fab fa-linkedin-in
-    link: https://linkedin.com/
+    link: https://www.linkedin.com/in/patrick-brady-041291381/
   
   - name: email
     icon: fas fa-envelope

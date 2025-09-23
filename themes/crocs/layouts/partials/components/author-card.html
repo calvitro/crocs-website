@@ -1,14 +1,19 @@
 <div class="bg-light dark:bg-darkmode-light rounded p-8 text-center mx-auto max-w-md h-full flex flex-col justify-between">
   {{ $image:= .Params.image }}
   {{ if $image }}
-    {{ partial "image" (dict "Src" $image "Context" .Page "Alt" .Title "Class" "mx-auto mb-6 rounded-full" "size" "200x200") }}
+    {{ partial "image" (dict
+  "Src" $image
+  "Context" .Page
+  "Alt" .Title
+  "Class" "mx-auto mb-6 w-[200px] h-[200px] rounded-full object-cover"
+  "Resize" "200x200"
+  "Loading" "lazy"
+) }}
   {{ else if .Params.Email }}
     <img
-      class="mx-auto mb-6 rounded"
-      alt="{{ .Title }}"
-      height="120"
-      width="120"
-      src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=128&pg&d=identicon" />
+  class="mx-auto mb-6 w-[200px] h-[200px] rounded-full object-cover"
+  alt="{{ .Title }}"
+  src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=200&pg&d=identicon" />
   {{ end }}
   <h4 class="mb-3">
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
