@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: sschappert@unomaha.edu
 description: "Sarah Schappert"
-image: "/images/altlogo.png"
+image: "/images/Schappert-Photo.png"
 categories: ["Event Security", "Online Extremism", "BTAM", "Video Games"]
 draft: false
 social:

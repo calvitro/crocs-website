@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: amunderloh@unomaha.edu
 description: "Allison Munderloh"
-image: "/images/altlogo.png"
+image: "/images/Munderloh-Photo.png"
 categories: ["Terrorism", "Event Security", "Gun Violence"]
 draft: false
 social:

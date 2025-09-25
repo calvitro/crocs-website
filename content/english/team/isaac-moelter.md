@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: imoelter@unomaha.edu
 description: "Isaac Moelter"
-image: "/images/altlogo.png"
+image: "/images/Moelter-Photo.png"
 categories: ["Extremism", "Corrections"]
 draft: false
 social:

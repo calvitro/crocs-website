@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: cvitro@unomaha.edu
 description: "callie vitro"
-image: "/images/altlogo.png"
+image: "/images/Vitro-Photo.png"
 categories: ["Event Security", "Leadership", "ISIS"]
 draft: false
 social:

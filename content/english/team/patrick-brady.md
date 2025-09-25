@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: pbrady@unomaha.edu
 description: "patrick brady"
-image: "/images/altlogo.png"
+image: "/images/Brady-Photo.png"
 categories: ["Topic", "Terrorism"]
 draft: false
 social:
