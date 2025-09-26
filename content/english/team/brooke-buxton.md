@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: bbuxton@unomaha.edu
 description: "Brooke Buxton"
-image: "/images/altlogo.png"
+image: "/images/Buxton-Photo.png"
 categories: ["ISIS", "Topic"]
 draft: false
 social:
