@@ -24,17 +24,6 @@ social:
     icon: fas fa-envelope
     link: mailto:pbrady@unomaha.edu
 
-  - name: ORCiD
-    icon: fab fa-orcid
-    link: https://orcid.org/
-
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Graduate Research Assistant
 <!--more-->

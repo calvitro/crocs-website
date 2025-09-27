@@ -16,10 +16,6 @@ social:
     icon: fas fa-graduation-cap
     link: https://scholar.google.com/citations?user=1HqqXzQAAAAJ
 
-  - name: linkedin
-    icon: fab fa-linkedin-in
-    link: https://www.linkedin.com/
-  
   - name: email
     icon: fas fa-envelope
     link: mailto:ekearns@unomaha.edu
@@ -27,10 +23,6 @@ social:
   - name: ORCiD
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-7895-9129
-
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
 
   - name: Website
     icon: fas fa-globe

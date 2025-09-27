@@ -28,13 +28,6 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0000-0003-1397-0092
 
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Co-Director
 <!--more-->

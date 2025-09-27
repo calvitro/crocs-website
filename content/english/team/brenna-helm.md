@@ -28,10 +28,6 @@ social:
     icon: fab fa-orcid
     link: https://orcid.org/0000-0002-6412-2037
 
-  - name: GitHub
-    icon: fab fa-github
-    link: https://github.com/
-
   - name: Website
     icon: fas fa-globe
     link: https://www.brennahelmportfolio.com/

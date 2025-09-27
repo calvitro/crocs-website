@@ -32,9 +32,6 @@ social:
     icon: fab fa-github
     link: https://github.com/sschappert
 
-  - name: Website
-    icon: fas fa-globe
-    link: https://google.com/
 ---
 Graduate Research Assistant
 <!--more-->
