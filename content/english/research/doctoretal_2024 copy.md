@@ -3,7 +3,7 @@ title: "Militant leadership and terrorism in armed conflict"
 meta_title: ""
 description: "this is meta description"
 date: 2023-04-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/tempborder.png"
 categories: ["Leadership"]
 authors: ["Austin Doctor", "Samuel Hunter", "Gina Ligon"]
 tags: ["manuscript", "research"]

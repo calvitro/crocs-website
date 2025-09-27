@@ -3,7 +3,7 @@ title: "The role of family members in the prevention of violent extremism and te
 meta_title: ""
 description: "this is meta description"
 date: 2024-09-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/tempborder.png"
 categories: ["SAR"]
 authors: ["Karen Sporer", "Brooke Buxton"]
 tags: ["manuscript", "research"]

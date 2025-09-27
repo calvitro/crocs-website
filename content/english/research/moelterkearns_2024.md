@@ -3,7 +3,7 @@ title: "How do offender ideology and offense severity impact punitive attitudes 
 meta_title: ""
 description: "this is meta description"
 date: 2024-04-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/tempborder.png"
 categories: ["Survey", "Ideology"]
 authors: ["Isaac Moelter", "Erin Kearns"]
 tags: ["manuscript", "research"]

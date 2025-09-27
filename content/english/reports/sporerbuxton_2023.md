@@ -3,7 +3,7 @@ title: "Facilitating suspicious activity reporting at the community level "
 meta_title: ""
 description: "this is meta description"
 date: 2023-06-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/tempborder.png"
 categories: ["SAR"]
 authors: ["Karen Sporer", "Brooke Buxton"]
 tags: ["report", "research"]

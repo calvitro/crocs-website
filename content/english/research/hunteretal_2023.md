@@ -3,7 +3,7 @@ title: "Equifinality and the key role it plays in understanding the future of le
 meta_title: ""
 description: "this is meta description"
 date: 2023-10-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/tempborder.png"
 categories: ["Leadership"]
 authors: ["Samuel Hunter", "Austin Doctor", "Matt Allen", "Gina Ligon"]
 tags: ["report", "research"]

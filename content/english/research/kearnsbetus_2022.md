@@ -3,7 +3,7 @@ title: "Asymmetric coverage of asymmetric violence: How US print news media repo
 meta_title: ""
 description: "this is meta description"
 date: 2022-06-04T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/tempborder.png"
 categories: ["Media"]
 authors: ["Erin Kearns", "Allison Betus"]
 tags: ["manuscript", "research"]
