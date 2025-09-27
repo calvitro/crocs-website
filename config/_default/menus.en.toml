@@ -64,6 +64,6 @@ url = "/team"
 weight = 2
 
 [[footer]]
-name = "Privacy Policy"
-url = "/privacy-policy"
+name = "Our Research"
+url = "/research"
 weight = 3
