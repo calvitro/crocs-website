@@ -1,58 +1,67 @@
 <footer class="bg-accent dark:bg-darkmode-light">
   <div class="container">
-    <div class="row items-center py-10">
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
-        <!-- navbar brand/logo -->
-        <a
-          class="navbar-brand inline-block"
-          href="{{ site.Home.RelPermalink }}">
-          {{ partial "logo" }}
-        </a>
+    <!-- Top row -->
+    <div class="row items-center pb-0">
+      <!-- Left: logo (+ gator on small only) -->
+      <div class="lg:col-3 mb-0 text-center lg:mb-0 lg:text-left">
+        <div class="flex items-center justify-center lg:justify-start gap-2">
+          <a class="navbar-brand inline-flex items-center justify-center shrink-0"
+             href="{{ site.Home.RelPermalink }}">
+            {{ partial "logo" }}
+          </a>
+
+          <!-- Gator for small screens - much smaller to match logo scale -->
+          {{ with resources.Get "images/mcmellow_crocs.png" }}
+          <a href="{{ `crocs-website/404/` | relLangURL }}" class="block lg:hidden shrink-0">
+            <img
+              src="{{ .RelPermalink }}"
+              alt=""
+              class="h-25 w-25 sm:h-25 sm:w-25 object-contain"
+            />
+          </a>
+          {{ end }}
+        </div>
       </div>
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
+
+
+      <!-- Middle: links -->
+      <div class="lg:col-6 mb-0 text-center lg:mb-0">
+        <ul class="leading-none">
           {{ range site.Menus.footer }}
-            <li class="m-3 inline-block">
+            <li class="inline-block mx-3 my-0">
               <a
-                {{ if findRE `^http` .URL }}
-                  target="_blank" rel="noopener"
-                {{ end }}
+                class="inline-block py-2"
+                {{ if findRE `^http` .URL }} target="_blank" rel="noopener" {{ end }}
                 href="{{ if findRE `^#` .URL }}
-                  {{ if not $.IsHome }}
-                    {{ site.Home.RelPermalink }}
-                  {{ end }}{{ .URL }}
-                {{ else }}
-                  {{ .URL | relLangURL }}
-                {{ end }}"
-                >{{ .Name }}</a
-              >
+                        {{ if not $.IsHome }}{{ site.Home.RelPermalink }}{{ end }}{{ .URL }}
+                      {{ else }}
+                        {{ .URL | relLangURL }}
+                      {{ end }}"
+              >{{ .Name }}</a>
             </li>
           {{ end }}
         </ul>
       </div>
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
-        <ul class="social-icons">
-          {{ range site.Data.social.main }}
-            <li>
-              <a
-                target="_blank"
-                aria-label="{{ .name }}"
-                rel="nofollow noopener"
-                href="{{ .link | safeURL }}">
-                <i class="{{ .icon }}"></i>
-              </a>
-            </li>
-          {{ end }}
-        </ul>
+
+     <!-- Right: gator for large screens -->
+      <div class="lg:col-3 mb-0 hidden lg:flex items-center justify-end">
+        {{ with resources.Get "images/mcmellow_crocs.png" }}
+         <a href="{{`crocs-website/404/`| relLangURL }}" class="shrink-0">
+          <img
+            src="{{ .RelPermalink }}"
+            alt=""
+            class="h-auto w-16 lg:w-25 xl:w-25 object-contain"
+          />
+          </a>
+        {{ end }}
       </div>
     </div>
-  </div>
-  <div class="border-border dark:border-darkmode-border border-t py-7">
-    <div
-      class="text-text-light dark:text-light container text-center">
-      <p>
-        {{ site.Params.copyright | markdownify }}
-      </p>
+
+    <!-- Border + copyright -->
+    <div class="border-border dark:border-darkmode-border border-t pt-5 pb-6">
+      <div class="text-text-light dark:text-light text-center">
+        <p>{{ site.Params.copyright | markdownify }}</p>
+      </div>
     </div>
   </div>
 </footer>

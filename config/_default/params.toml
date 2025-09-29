@@ -35,18 +35,12 @@ copyright = "Designed & Developed by [Zeon Studio](https://zeon.studio)"
 enable = false
 preloader = "" # use jpg, png, svg or gif format.
 
-# Navigation button
-[navigation_button]
-enable = true
-label = "contact us"
-link = "contact"
-
 # search
 # search module: https://github.com/gethugothemes/hugo-modules/tree/master/search
 [search]
 enable = true
 primary_color = "#014421"
-include_sections = ["blog"]
+include_sections = ["blog", "research", "team", "gallery"]
 show_image = true
 show_description = true
 show_tags = true
