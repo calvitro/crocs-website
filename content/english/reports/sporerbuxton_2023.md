@@ -26,4 +26,4 @@ This report is part of the larger NCITE funded project “Facilitating Suspiciou
 What are the barriers to acknowledging and reporting suspicious behavior among family members of
 homegrown violent extremists?
 
-## Full Paper
+## Full Report

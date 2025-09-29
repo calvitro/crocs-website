@@ -18,7 +18,7 @@ name = "Our Research"
 
 [[main]]
 parent = "Our Research"
-name = "Manucripts"
+name = "Manuscripts"
 url = "/manuscripts"
 
 [[main]]
