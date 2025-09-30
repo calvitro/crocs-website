@@ -37,3 +37,13 @@
   color: #014421; /* A common blue for links */
   text-decoration: underline; /* Adds an underline */
 }
+.gdesc a, 
+.gslide-desc a {
+  color: #AABDAE;        /* or your theme’s accent color */
+  text-decoration: underline;
+}
+
+.gdesc a:hover, 
+.gslide-desc a:hover {
+  color: #014421;        /* darker on hover */
+}

@@ -1,0 +1,112 @@
+{{- $dir := .Get "dir" -}}
+{{- $class := .Get "class" -}}
+{{- $webp := .Get "webp" | default "true" -}}
+{{- $zoomable := .Get "zoomable" | default "false" -}}
+
+<div class="gallery {{ $class }}">
+  {{- $galleryDir := path.Join "assets" $dir -}}
+  {{- range (readDir $galleryDir) -}}
+    {{- if not .IsDir -}}
+      {{- $name := .Name -}}
+      {{- $assetPath := path.Join $dir $name -}}
+
+      {{- if or (strings.HasSuffix $name ".jpg") (strings.HasSuffix $name ".jpeg") (strings.HasSuffix $name ".png") (strings.HasSuffix $name ".webp") -}}
+        {{- $img := resources.Get $assetPath -}}
+        {{- if $img -}}
+          {{- /* Optional caption */ -}}
+          {{- $captionFile := replaceRE "\\.(jpg|jpeg|png|webp)$" ".txt" $name -}}
+          {{- $captionPath := path.Join "assets" $dir $captionFile -}}
+          {{- $caption := "" -}}
+          {{- if fileExists $captionPath -}}
+            {{- $caption = readFile $captionPath | strings.TrimSpace -}}
+          {{- end -}}
+
+          {{- /* Build responsive variants */ -}}
+          {{- $widths := slice 320 480 640 800 1024 1280 -}}
+
+          {{- $webpSet := slice -}}
+          {{- $origSet := slice -}}
+          {{- range $w := $widths -}}
+            {{- $wwebp := $img.Resize (printf "%dx webp q75" $w) -}}
+            {{- $webpSet = $webpSet | append (printf "%s %dw" $wwebp.RelPermalink $w) -}}
+
+            {{- $worig := $img.Resize (printf "%dx q80" $w) -}}
+            {{- $origSet = $origSet | append (printf "%s %dw" $worig.RelPermalink $w) -}}
+          {{- end -}}
+
+          {{- /* Choose a reasonable default display candidate */ -}}
+          {{- $default := $img.Resize "800x q80" -}}
+
+          <div class="gallery-item">
+            {{- if eq $zoomable "true" -}}
+              {{- $zoom := $img.Resize "1400x q70" -}}
+              <a href="{{ $zoom.RelPermalink }}"
+                 {{- if $caption }} data-glightbox="description: {{ replace $caption `"` `&quot;` }}" {{- end }}
+                 data-gallery="gallery"
+                 class="glightbox">
+            {{- end -}}
+
+            <picture>
+              {{- if eq $webp "true" -}}
+                <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" 
+                        sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 20vw">
+              {{- end -}}
+              <img
+                src="{{ $default.RelPermalink }}"
+                srcset="{{ delimit $origSet ", " }}"
+                sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 20vw"
+                alt="{{ replaceRE "\\.(jpg|jpeg|png|webp)$" "" $name }}"
+                loading="lazy" decoding="async"
+                width="{{ $default.Width }}" height="{{ $default.Height }}" />
+            </picture>
+
+            {{- if eq $zoomable "true" -}}
+              </a>
+            {{- end -}}
+          </div>
+
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+</div>
+
+<style>
+.gallery {
+  column-width: 240px;
+  column-gap: 12px;
+  margin: 2rem auto;
+  max-width: 1400px;
+}
+
+.gallery-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* force at least 2–3 columns on smaller screens */
+@media (max-width: 900px) {
+  .gallery {
+    column-width: auto;
+    column-count: 3;
+  }
+}
+@media (max-width: 600px) {
+  .gallery {
+    column-width: auto;
+    column-count: 2;
+  }
+}
+</style>
