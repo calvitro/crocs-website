@@ -4,7 +4,7 @@ role: "research associate"
 meta_title: ""
 email: brottweiler@unomaha.edu
 description: "Bettina Rottweiler"
-image: "/images/altlogo.png"
+image: "/images/Rottweiler-Photo.png"
 categories: ["Youth Mobilization", "Extremism", "Conspiracy Theories"]
 draft: false
 social:
