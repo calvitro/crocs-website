@@ -12,7 +12,7 @@
 
           <!-- Gator for small screens - much smaller to match logo scale -->
           {{ with resources.Get "images/mcmellow_crocs.png" }}
-          <a href="{{ `crocs-website/404/` | relLangURL }}" class="block lg:hidden shrink-0">
+          <a href="{{ `/404/` | relLangURL }}" class="block lg:hidden shrink-0">
             <img
               src="{{ .RelPermalink }}"
               alt=""
@@ -46,7 +46,7 @@
      <!-- Right: gator for large screens -->
       <div class="lg:col-3 mb-0 hidden lg:flex items-center justify-end">
         {{ with resources.Get "images/mcmellow_crocs.png" }}
-         <a href="{{`crocs-website/404/`| relLangURL }}" class="shrink-0">
+         <a href="{{`/404/`| relLangURL }}" class="shrink-0">
           <img
             src="{{ .RelPermalink }}"
             alt=""

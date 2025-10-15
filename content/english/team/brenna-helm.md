@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: "/crocs-website/documents/Helm.CV.September.2025.pdf"
+    link: "/documents/Helm.CV.September.2025.pdf"
 
   - name: google scholar
     icon: fas fa-graduation-cap
