@@ -7,7 +7,7 @@ const toggleComment = ({ filepath, regex }) => {
 
   if (filepath.endsWith("hugo.toml")) {
     updatedContent = updatedContent.replace(
-      'baseURL = "https://calvitro.github.io/crocs-website/"',
+      'baseURL = "https://crocslab.org"',
       'baseURL = "/"',
     );
   }

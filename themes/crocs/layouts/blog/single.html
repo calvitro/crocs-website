@@ -45,18 +45,18 @@
             {{ .Content }}
           </div>
           <div class="row items-start justify-between">
-            {{ $tags:= .Params.tags }}
+            {{ $tags := .Params.tags }}
             {{ if $tags }}
-              <div class="lg:col-6 mb-10 flex items-center lg:mb-0">
-                <h5 class="mr-3">{{ T "tags" }} :</h5>
-                <ul>
-                  {{ range $i,$p:= $tags }}
-                    <li class="inline-block">
-                      <a
-                        class="bg-light hover:bg-primary dark:bg-darkmode-light dark:hover:bg-darkmode-primary dark:hover:text-text-dark m-1 block rounded px-3 py-1 hover:text-white"
-                        href="{{ `tags/` | relLangURL }}{{ . | urlize | lower }}/">
-                        {{ . | humanize }}
-                      </a>
+              <li class="mr-4 inline-block">
+                <i class="fa-regular fa-folder mr-2"></i>
+                {{ range $i,$p:= $tags }}
+                  <a
+                    href="{{ `tags/` | relLangURL }}{{ . | urlize | lower }}/"
+                    class=""
+                    >{{ . | humanize }}{{ if ne $i (sub (len $tags) 1) }}
+                      {{ "," }}
+                    {{ end }}
+                  </a>
                     </li>
                   {{ end }}
                 </ul>
