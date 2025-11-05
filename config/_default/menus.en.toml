@@ -40,6 +40,11 @@ parent = "Pages"
 name = "Gallery"
 url = "/gallery"
 
+[[main]]
+parent = "Pages"
+name = "Lab News"
+url = "/news"
+
 [[footer]]
 name = "Meet the Team"
 url = "/team"
@@ -48,14 +53,16 @@ weight = 1
 [[footer]]
 name = "Our Research"
 url = "/research"
-weight = 3
+weight = 2
 
 [[footer]]
 name = "Photo Gallery"
 url = "/gallery"
 weight = 3
 
-[[main]]
-parent = "Pages"
+[[footer]]
 name = "Lab News"
 url = "/news"
+weight = 4
+
+
