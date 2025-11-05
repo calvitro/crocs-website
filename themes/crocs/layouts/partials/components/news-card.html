@@ -1,0 +1,25 @@
+<div class="bg-body dark:bg-darkmode-body">
+  {{ $image := "" }}
+  {{ if (and (ne .Params.image nil) (ne .Params.image "")) }}
+    {{ $image = .Params.image }}
+  {{ else if (and (ne .image nil) (ne .image "")) }}
+    {{ $image = .image }}
+  {{ else if (and (ne .Params.avatar nil) (ne .Params.avatar "")) }}
+    {{ $image = .Params.avatar }}
+  {{ end }}
+
+  {{ if $image }}
+    {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "mb-6 w-full aspect-[8/3] rounded object-cover") }}
+  {{ end }}
+
+  <h4 class="mb-3">
+    <a href="{{ .Permalink }}">
+      {{ .Title }}
+    </a>
+  </h4>
+
+  <p class="mb-6">{{ .Summary | plainify }}</p>
+  <a class="btn btn-outline-primary btn-sm" href="{{ .Permalink }}">
+    {{ T "read_more" }}
+  </a>
+</div>

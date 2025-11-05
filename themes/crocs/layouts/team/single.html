@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="section-sm pb-0">
+  <section class="section-sm pb-16">
     <div class="container">
       <div
         class="row border-border dark:border-darkmode-border justify-center border-b pb-14">
@@ -20,69 +20,160 @@
             {{ .Content }}
           </div>
           <ul class="social-icons ml-4 mt-10 text-center">
-            {{ range .Params.social }}
-              <li>
-                <a
-                  href="{{ .link | safeURL }}"
-                  target="_blank"
-                  rel="noopener nofollow">
-                  <span class="sr-only">{{ .title }}</span>
-                  <i class="{{ .icon }}"></i>
-                </a>
-              </li>
-            {{ end }}
-          </ul>
+  {{ range .Params.social }}
+    <li>
+      <a
+        href="{{ .link | safeURL }}"
+        target="_blank"
+        rel="noopener nofollow"
+        aria-label="{{ .name }}"
+        title="{{ .name }}">
+        <span class="sr-only">{{ .name }}</span>
+        <i class="{{ .icon }}"></i>
+      </a>
+    </li>
+  {{ end }}
+</ul>
         </div>
       </div>
 
-   <!-- Read Their Work Section -->
-      {{ $authorName := .Title }}
-      {{ $authorPosts := slice }}
-      
-      <!-- Define which sections to include -->
-      {{ $allowedSections := slice "research" "blog" }}
-      
-      <!-- Check for posts with single author field in allowed sections -->
-      {{ range $allowedSections }}
-        {{ $section := . }}
-        {{ $sectionPosts := where (where site.RegularPages "Section" "==" $section) "Params.author" "==" $authorName }}
-        {{ $authorPosts = $authorPosts | append $sectionPosts }}
+<!-- Read Their Work Section -->
+{{ $authorName := .Title }}
+{{ $authorPosts := slice }}
+
+{{ $allowedSections := slice "research" "blog" }}
+
+{{ range $allowedSections }}
+  {{ $section := . }}
+  {{ $sectionPosts := where (where site.RegularPages "Section" "==" $section) "Params.author" "==" $authorName }}
+  {{ $authorPosts = $authorPosts | append $sectionPosts }}
+{{ end }}
+
+{{ range site.RegularPages }}
+  {{ if and (in $allowedSections .Section) .Params.authors }}
+    {{ if reflect.IsSlice .Params.authors }}
+      {{ if in .Params.authors $authorName }}
+        {{ $authorPosts = $authorPosts | append . }}
       {{ end }}
-      
-      <!-- Check for posts with multiple authors field in allowed sections -->
-      {{ range site.RegularPages }}
-        {{ if and (in $allowedSections .Section) .Params.authors }}
-          {{ if reflect.IsSlice .Params.authors }}
-            {{ if in .Params.authors $authorName }}
-              {{ $authorPosts = $authorPosts | append . }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-      {{ end }}
-      
-      <!-- Remove duplicates -->
-      {{ $authorPosts = uniq $authorPosts }}
-      
-      {{ if $authorPosts }}
-        <div class="row pt-14">
-          <div class="col-12 mb-8">
-            <h2 class="h3">Publications by {{ .Title }}</h2>
-            <p class="text-text-light dark:text-darkmode-text-light">{{ len $authorPosts }} publication{{ if ne (len $authorPosts) 1 }}s{{ end }} found</p>
-          </div>
-          {{ range $authorPosts }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $authorPosts = uniq $authorPosts }}
+{{ $authorPosts = sort $authorPosts "Date" "desc" }}
+
+{{ $slug := .File.BaseFileName }}
+
+{{ if $authorPosts }}
+  <div class="row pt-14">
+    <div class="col-12 mb-8">
+      <h2 class="h3">Publications by {{ .Title }}</h2>
+      <p class="text-text-light dark:text-darkmode-text-light">
+        {{ len $authorPosts }} publication{{ if ne (len $authorPosts) 1 }}s{{ end }} found
+      </p>
+    </div>
+
+    <!-- First 3 -->
+    {{ range first 3 $authorPosts }}
+      <div class="md:col-6 lg:col-4 mb-12">
+        {{ partial "components/blog-card" . }}
+      </div>
+    {{ end }}
+
+    <!-- Hidden rest -->
+    {{ $rest := after 3 $authorPosts }}
+    {{ if gt (len $authorPosts) 3 }}
+  <div class="col-12 text-center mt-4">
+    <button id="toggle-pubs-{{ $slug }}" 
+      class="btn btn-primary">
+      Show All {{ .Title }}'s publications
+    </button>
+      </div>
+
+      <div id="all-pubs-{{ $slug }}" class="hidden w-full mt-8">
+        <div class="row">
+          {{ range $rest }}
             <div class="md:col-6 lg:col-4 mb-12">
               {{ partial "components/blog-card" . }}
             </div>
           {{ end }}
         </div>
+      </div>
+
+      <script>
+        (function () {
+          var btn = document.getElementById('toggle-pubs-{{ $slug }}');
+          var box = document.getElementById('all-pubs-{{ $slug }}');
+          if (!btn || !box) return;
+
+          btn.addEventListener('click', function () {
+            var hidden = box.classList.contains('hidden');
+            if (hidden) {
+              box.classList.remove('hidden');
+              btn.textContent = 'Show fewer publications';
+              btn.setAttribute('aria-expanded', 'true');
+            } else {
+              box.classList.add('hidden');
+              btn.textContent = 'Show All {{ .Title }}’s Publications';
+              btn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        })();
+      </script>
+    {{ end }}
+  </div>
+{{ else }}
+  <div class="row pt-14">
+    <div class="col-12 text-center">
+      <h2 class="h4 mb-4">No Publications Found</h2>
+      <p class="text-text-light dark:text-darkmode-text-light">
+        No research papers found for {{ .Title }}.
+      </p>
+      <a href="{{ `research/` | relLangURL }}" class="btn btn-primary mt-4">
+        <i class="fas fa-arrow-left mr-2"></i>
+        View All Research
+      </a>
+    </div>
+  </div>
+{{ end }}
+
+      <!-- Latest News Section -->
+      {{ $authorSlug := .File.BaseFileName }}
+      {{ $newsArticles := slice }}
+      
+      <!-- Find news articles where this person is in featured_people -->
+      {{ $newsSection := "news" }}
+      {{ range where site.RegularPages "Section" "==" $newsSection }}
+        {{ if .Params.featured_people }}
+          {{ if in .Params.featured_people $authorSlug }}
+            {{ $newsArticles = $newsArticles | append . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      
+      <!-- Sort by date and take latest 3 -->
+      {{ $newsArticles = first 3 $newsArticles }}
+      
+      {{ if $newsArticles }}
+        <div class="row pt-14 border-t border-border dark:border-darkmode-border mt-14">
+          <div class="col-12 mb-8">
+            <h2 class="h3">Latest News featuring {{ .Title }}</h2>
+            <p class="text-text-light dark:text-darkmode-text-light">{{ len $newsArticles }} news article{{ if ne (len $newsArticles) 1 }}s{{ end }} found</p>
+          </div>
+          {{ range $newsArticles }}
+            <div class="md:col-6 lg:col-4 mb-12">
+              {{ partial "components/news-card" . }}
+            </div>
+          {{ end }}
+        </div>
       {{ else }}
-        <div class="row pt-14">
+        <div class="row pt-14 border-t border-border dark:border-darkmode-border mt-14">
           <div class="col-12 text-center">
-            <h2 class="h4 mb-4">No Publications Found</h2>
-            <p class="text-text-light dark:text-darkmode-text-light">No research papers found for {{ .Title }}.</p>
-            <a href="{{ `research/` | relLangURL }}" class="btn btn-primary mt-4">
-              <i class="fas fa-arrow-left mr-2"></i>
-              View All Research
+            <h2 class="h4 mb-4">No News Articles Found</h2>
+            <p class="text-text-light dark:text-darkmode-text-light">{{ .Title }} hasn't been featured in any lab news yet.</p>
+            <a href="{{ `news/` | relLangURL }}" class="btn btn-primary mt-4">
+              <i class="fas fa-newspaper mr-2"></i>
+              View All Lab News
             </a>
           </div>
         </div>
