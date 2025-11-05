@@ -4,7 +4,7 @@ meta_title: ""
 description: "this is meta description"
 date: 2025-11-04T05:00:00Z
 image: "/images/tempborder.png"
-categories: ["Leaders", "Terrorism", "Attacks"]
+categories: ["Leadership", "Terrorism", "Attacks"]
 authors: ["Michael Logan", "Matthew Crayne", "Austin Doctor", "Gina Ligon"]
 tags: ["manuscript", "research"]
 draft: false
