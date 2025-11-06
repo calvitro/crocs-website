@@ -3,7 +3,7 @@ title: "Examining officer support for community policing in counterterrorism ove
 meta_title: ""
 description: "this is meta description"
 date: 2022-12-04T05:00:00Z
-image: "/images/policeborder.jpg"
+image: "/images/policeborder.png"
 categories: ["Police"]
 authors: ["Erin Kearns", "Samantha Senn"]
 tags: ["manuscript", "research"]

@@ -3,7 +3,7 @@ title: "Screening for insider threats in US law enforcement: A national sample o
 meta_title: ""
 description: "this is meta description"
 date: 2024-07-04T05:00:00Z
-image: "/images/policeborder.jpg"
+image: "/images/policeborder.png"
 categories: ["Police", "Insider Threats"]
 authors: ["Erin Kearns", "Sadaf Hashimi", "Jessica Huff", "Justin Nix", "Natalie Cotton"]
 tags: ["report", "research"]

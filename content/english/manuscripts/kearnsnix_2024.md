@@ -3,7 +3,7 @@ title: "How generalizable are findings from police surveys? A review of multi-ag
 meta_title: ""
 description: "this is meta description"
 date: 2024-04-04T05:00:00Z
-image: "/images/policeborder.jpg"
+image: "/images/policeborder.png"
 categories: ["Police"]
 authors: ["Erin Kearns", "Justin Nix"]
 tags: ["manuscript", "research"]
