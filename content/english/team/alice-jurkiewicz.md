@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: ajurkiewicz@unomaha.edu
 description: "Alice Jurkiewicz"
-image: "/images/image-placeholder.png"
+image: "/images/Jurkiewicz-Photo.png"
 categories: ["Hate Crimes", "Youth Mobilization", "Extremism", "Online"]
 draft: false
 social:
