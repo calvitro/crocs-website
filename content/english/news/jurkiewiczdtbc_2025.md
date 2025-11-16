@@ -10,7 +10,7 @@ Graduate student <a href=/team/alice-jurkiewicz>Alice Jurkiewicz</a> received th
 
 <!--more--> 
 
-![Alice Jurkiewicz receives DTBC student paper award](/images/gallery/gallery7.jpeg)
+![Alice Jurkiewicz receives DTBC student paper award](/images/gallery/gallery7.png)
 
 Alice's winning paper is titled *Awareness of and attitudes toward anti-Asian hate crimes post COVID-19.*
 
