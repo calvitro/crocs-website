@@ -10,6 +10,8 @@ Graduate student <a href=/team/alice-jurkiewicz>Alice Jurkiewicz</a> received th
 
 <!--more--> 
 
+![Alice Jurkiewicz receives DTBC student paper award](/images/gallery/gallery7.jpeg)
+
 Alice's winning paper is titled *Awareness of and attitudes toward anti-Asian hate crimes post COVID-19.*
 
 **This study examined U.S. adults’ awareness of and attitudes toward anti-Asian hate crimes post-pandemic. She assessed how source credibility, detail level, and victim statements influence perceptions using a survey-based experiment. Findings are intended to improve understanding of societal responses and inform efforts to combat racial discrimination.**
