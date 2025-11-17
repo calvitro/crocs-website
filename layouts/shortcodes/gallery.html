@@ -21,25 +21,25 @@
             {{- $caption = readFile $captionPath | strings.TrimSpace -}}
           {{- end -}}
 
-          {{- /* Build responsive variants */ -}}
-          {{- $widths := slice 320 480 640 800 1024 1280 -}}
+          {{- /* Build responsive variants with higher quality */ -}}
+          {{- $widths := slice 400 600 800 1000 1280 1600 -}}
 
           {{- $webpSet := slice -}}
           {{- $origSet := slice -}}
           {{- range $w := $widths -}}
-            {{- $wwebp := $img.Resize (printf "%dx webp q75" $w) -}}
+            {{- $wwebp := $img.Resize (printf "%dx webp q85" $w) -}}
             {{- $webpSet = $webpSet | append (printf "%s %dw" $wwebp.RelPermalink $w) -}}
 
-            {{- $worig := $img.Resize (printf "%dx q80" $w) -}}
+            {{- $worig := $img.Resize (printf "%dx q90" $w) -}}
             {{- $origSet = $origSet | append (printf "%s %dw" $worig.RelPermalink $w) -}}
           {{- end -}}
 
-          {{- /* Choose a reasonable default display candidate */ -}}
-          {{- $default := $img.Resize "800x q80" -}}
+          {{- /* Higher quality default */ -}}
+          {{- $default := $img.Resize "1000x q90" -}}
 
           <div class="gallery-item">
             {{- if eq $zoomable "true" -}}
-              {{- $zoom := $img.Resize "1400x q70" -}}
+              {{- $zoom := $img.Resize "1800x q85" -}}
               <a href="{{ $zoom.RelPermalink }}"
                  {{- if $caption }} data-glightbox="description: {{ replace $caption `"` `&quot;` }}" {{- end }}
                  data-gallery="gallery"
@@ -49,12 +49,12 @@
             <picture>
               {{- if eq $webp "true" -}}
                 <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" 
-                        sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 20vw">
+                        sizes="(min-width: 1400px) 20vw, (min-width: 900px) 30vw, (min-width: 600px) 45vw, 50vw">
               {{- end -}}
               <img
                 src="{{ $default.RelPermalink }}"
                 srcset="{{ delimit $origSet ", " }}"
-                sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 20vw"
+                sizes="(min-width: 1400px) 20vw, (min-width: 900px) 30vw, (min-width: 600px) 45vw, 50vw"
                 alt="{{ replaceRE "\\.(jpg|jpeg|png|webp)$" "" $name }}"
                 loading="lazy" decoding="async"
                 width="{{ $default.Width }}" height="{{ $default.Height }}" />
@@ -72,43 +72,47 @@
 </div>
 
 <style>
-.gallery {
-  column-width: 240px;
-  column-gap: 12px;
+/* Use a single custom property to keep gutters perfectly equal */
+:root { --gutter: 12px; }
+
+/* Container: responsive columns by desired column width */
+.gallery{
+  /* Let the browser choose how many columns fit, targeting ~300px */
+  column-width: 300px;         /* auto-resizes # of columns */
+  column-gap: var(--gutter);
+  padding: var(--gutter);      /* equal outer spacing on all sides */
   margin: 2rem auto;
   max-width: 1400px;
+  box-sizing: border-box;
 }
 
-.gallery-item {
+/* Items: inline-block for CSS columns; bottom margin matches the gap */
+.gallery-item{
   display: inline-block;
   width: 100%;
-  margin-bottom: 12px;
+  margin: 0 0 var(--gutter);
   border-radius: 10px;
   overflow: hidden;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
+  page-break-inside: avoid;
 }
 
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Images */
+.gallery-item img{
+  display:block;
+  width:100%;
+  height:auto;
+  transition: transform .3s ease; /* move transition here for smoother hover */
 }
 
-.gallery-item a:hover img { transform: scale(1.02); }
+.gallery-item a{ display:block; }
 
-/* force at least 2–3 columns on smaller screens */
-@media (max-width: 900px) {
-  .gallery {
-    column-width: auto;
-    column-count: 4;
-  }
-}
-@media (max-width: 600px) {
-  .gallery {
-    column-width: auto;
-    column-count: 3;
-  }
-}
+.gallery-item a:hover img{ transform: scale(1.02); }
+
+/* Optional: tweak the target column width at certain breakpoints */
+@media (max-width: 1200px){ .gallery{ column-width: 260px; } }
+@media (max-width: 900px) { .gallery{ column-width: 220px; } }
+@media (max-width: 600px) { .gallery{ column-width: 180px; } }
+/* On very small screens, one column will naturally happen once the container is narrower than column-width + padding + gaps */
 </style>
