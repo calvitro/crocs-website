@@ -1,7 +1,7 @@
 ---
 title: "Allison Munderloh receives UNO grant for research"
 date: 2025-11-05
-image: "/images/tempborder.png"
+image: "/images/tempborder_news.png"
 featured_people:
   - "allison-munderloh"
   - "erin-kearns"

@@ -1,7 +1,7 @@
 ---
 title: "Alice Jurkiewicz receives DTBC student paper award"
 date: 2025-11-05
-image: "/images/tempborder.png"
+image: "/images/tempborder_news.png"
 featured_people:
   - "alice-jurkiewicz"
 link: 
