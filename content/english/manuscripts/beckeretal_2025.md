@@ -9,6 +9,7 @@ authors: ["Michael Becker", "Michael Williams", "Alexa Hassan" ]
 tags: ["manuscript", "research"]
 draft: false
 paper_link: https://www.tandfonline.com/doi/full/10.1080/1057610X.2025.2545794#abstract
+
 ---
 
 Examining an attempt to integrate messaging applications and gamified approaches to deploy media literacy interventions.

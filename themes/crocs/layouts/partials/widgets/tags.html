@@ -3,29 +3,54 @@
   {{ if not (eq (len site.Taxonomies.tags) 0) }}
     <div class="mb-8">
       <h5 class="mb-6">{{ T "tags" }}</h5>
+
       <div class="outline outline-2 outline-theme_color:light dark:outline outline-2 outline-theme_color:light rounded p-8">
         <ul class="space-y-4">
           {{ range $name, $items := site.Taxonomies.tags }}
-            {{ $researchItems := where $items "Section" "research" }}
-            {{ if gt (len $researchItems) 0 }}
-              {{ $uniqueItems := slice }}
-              {{ $seenTitles := slice }}
-              {{ range $researchItems }}
-                {{ if not (in $seenTitles .Title) }}
-                  {{ $uniqueItems = $uniqueItems | append . }}
-                  {{ $seenTitles = $seenTitles | append .Title }}
+
+            {{/* Deduplicate items for this tag, preferring /research/ */}}
+            {{ $s := newScratch }}
+
+            {{ range $items }}
+              {{ $p := .Page }}
+
+              {{/* Use shared key: paper_id > filename base > slug > title */}}
+              {{ $key := "" }}
+              {{ with $p.Params.paper_id }}{{ $key = . }}{{ end }}
+              {{ if eq $key "" }}{{ with $p.File }}{{ $key = .ContentBaseName }}{{ end }}{{ end }}
+              {{ if eq $key "" }}{{ with $p.Slug }}{{ $key = . }}{{ end }}{{ end }}
+              {{ if eq $key "" }}{{ $key = $p.Title }}{{ end }}
+
+              {{ $m := $s.Get "unique" | default (dict) }}
+              {{ $existing := index $m $key }}
+
+              {{ if not $existing }}
+                {{ $s.SetInMap "unique" $key $p }}
+              {{ else }}
+                {{/* Prefer the /research/ version if both exist */}}
+                {{ if and (ne $existing.Section "research") (eq $p.Section "research") }}
+                  {{ $s.SetInMap "unique" $key $p }}
                 {{ end }}
               {{ end }}
+            {{ end }}
+
+            {{ $uniqueMap := $s.Get "unique" | default (dict) }}
+            {{ $count := len $uniqueMap }}
+
+            {{ if gt $count 0 }}
               <li class="inline-block">
-                
-                  class="hover:bg-primary dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `tags`) (eq $.Page.Title .Page.Title)) }}
+                <a
+                  class="hover:bg-primary dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark
+                  {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `tags`) (eq $.Page.Title $name)) }}
                     active
-                  {{ end }} m-2 block rounded bg-white px-2 py-1 hover:text-white"
-                  href="{{ .Page.RelPermalink }}">
-                  {{ .Page.Title }} <span>( {{ len $uniqueItems }} )</span>
+                  {{ end }}
+                  m-2 block rounded bg-white px-2 py-1 hover:text-white"
+                  href="/tags/{{ $name | urlize }}/">
+                  {{ $name }} <span>( {{ $count }} )</span>
                 </a>
               </li>
             {{ end }}
+
           {{ end }}
         </ul>
       </div>

@@ -1,18 +1,51 @@
 {{ define "main" }}
   {{ partial "page-header" . }}
 
-
   <section class="section">
     <div class="container">
       <div class="row gx-5">
-        <!-- blog posts -->
         <div class="lg:col-8">
           <div class="row">
+
+            {{ $s := newScratch }}
+
             {{ range .Data.Pages }}
+              {{ $p := . }}
+
+              {{/* De-dupe key: paper_link (best for your setup) > filename base > slug > title */}}
+              {{ $key := "" }}
+              {{ with $p.Params.paper_link }}{{ $key = . }}{{ end }}
+              {{ if eq $key "" }}{{ with $p.File }}{{ $key = .ContentBaseName }}{{ end }}{{ end }}
+              {{ if eq $key "" }}{{ with $p.Slug }}{{ $key = . }}{{ end }}{{ end }}
+              {{ if eq $key "" }}{{ $key = $p.Title }}{{ end }}
+
+              {{ $m := $s.Get "unique" | default (dict) }}
+              {{ $existing := index $m $key }}
+
+              {{ if not $existing }}
+                {{ $s.SetInMap "unique" $key $p }}
+              {{ else }}
+                {{/* Prefer /research/ if both exist */}}
+                {{ if and (ne $existing.Section "research") (eq $p.Section "research") }}
+                  {{ $s.SetInMap "unique" $key $p }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+
+            {{ $uniqueMap := $s.Get "unique" | default (dict) }}
+            {{ $unique := slice }}
+            {{ range $k, $v := $uniqueMap }}
+              {{ $unique = $unique | append $v }}
+            {{ end }}
+
+            {{ $unique = sort $unique "Date" "desc" }}
+
+            {{ range $unique }}
               <div class="md:col-6 mb-14">
                 {{ partial "components/blog-card" . }}
               </div>
             {{ end }}
+
           </div>
         </div>
       </div>
