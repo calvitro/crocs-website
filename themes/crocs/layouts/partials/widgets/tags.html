@@ -8,13 +8,21 @@
           {{ range $name, $items := site.Taxonomies.tags }}
             {{ $researchItems := where $items "Section" "research" }}
             {{ if gt (len $researchItems) 0 }}
+              {{ $uniqueItems := slice }}
+              {{ $seenTitles := slice }}
+              {{ range $researchItems }}
+                {{ if not (in $seenTitles .Title) }}
+                  {{ $uniqueItems = $uniqueItems | append . }}
+                  {{ $seenTitles = $seenTitles | append .Title }}
+                {{ end }}
+              {{ end }}
               <li class="inline-block">
-                <a
+                
                   class="hover:bg-primary dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `tags`) (eq $.Page.Title .Page.Title)) }}
                     active
                   {{ end }} m-2 block rounded bg-white px-2 py-1 hover:text-white"
                   href="{{ .Page.RelPermalink }}">
-                  {{ .Page.Title }} <span>( {{ len $researchItems }} )</span>
+                  {{ .Page.Title }} <span>( {{ len $uniqueItems }} )</span>
                 </a>
               </li>
             {{ end }}
