@@ -32,8 +32,8 @@ url = "/research"
 
 [[main]]
 parent = "Pages"
-name = "Blog"
-url = "/blog"
+name = "Research Insights"
+url = "/research-insights"
 
 [[main]]
 parent = "Pages"
