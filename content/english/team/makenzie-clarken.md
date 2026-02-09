@@ -18,7 +18,7 @@ social:
 
   - name: linkedin
     icon: fab fa-linkedin-in
-    link: linkedin.com/in/makenzie-clarken-9565081b6
+    link: https://linkedin.com/in/makenzie-clarken-9565081b6
   
   - name: email
     icon: fas fa-envelope

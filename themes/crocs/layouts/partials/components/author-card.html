@@ -1,4 +1,4 @@
-<div class="bg-light dark:bg-darkmode-light rounded p-8 text-center mx-auto max-w-md h-full flex flex-col justify-between">
+<div class="bg-light dark:bg-darkmode-light rounded p-8 text-center mx-auto max-w-md h-full flex flex-col">
   {{ $image:= .Params.image }}
   {{ if $image }}
     {{ partial "image" (dict
@@ -15,14 +15,24 @@
   alt="{{ .Title }}"
   src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=200&pg&d=identicon" />
   {{ end }}
-  <h4 class="mb-3">
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-  </h4>
-  <p class="mb-4">
-    {{ .Summary | plainify }}
-  </p>
+  
+  <!-- Fixed height container for name -->
+  <div class="mb-3 min-h-[3.5em] flex items-center justify-center">
+    <h4 class="mb-0">
+      <a href="{{ .RelPermalink }}">{{ replace .Title " " "<br>" | safeHTML }}</a>
+    </h4>
+  </div>
+  
+  <!-- Fixed height container for subtitle to ensure consistent spacing -->
+  <div class="mb-4 min-h-[3em] flex items-center justify-center">
+    <p class="mb-0">
+      {{ .Summary | plainify }}
+    </p>
+  </div>
+  
+  <!-- Icons without mt-auto - will appear right after subtitle -->
   <ul class="social-icons">
-    <ul class="flex justify-center flex-wrap gap-x-3 gap-y-3 mt-3 max-w-full">
+    <ul class="flex justify-center flex-wrap gap-x-3 gap-y-3 max-w-full">
     {{ range .Params.social }}
       <li>
         <a href="{{ .link | safeURL }}" target="_blank" rel="noopener nofollow" class="block">
