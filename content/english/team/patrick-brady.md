@@ -12,10 +12,6 @@ social:
     icon: fas fa-file-lines
     link: https://workspace.google.com/products/drive/
 
-  - name: google scholar
-    icon: fas fa-graduation-cap
-    link: https://scholar.google.com/
-
   - name: linkedin
     icon: fab fa-linkedin-in
     link: https://www.linkedin.com/in/patrick-brady-041291381/

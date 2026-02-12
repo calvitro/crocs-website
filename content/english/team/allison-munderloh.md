@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://workspace.google.com/products/drive/
+    link: https://docs.google.com/document/d/18vZ7nCu1JT4znG3106so2i3p8MdJkhbokEgFuHW9Klg/edit?tab=t.0
 
   - name: google scholar
     icon: fas fa-graduation-cap
@@ -18,7 +18,7 @@ social:
 
   - name: linkedin
     icon: fab fa-linkedin-in
-    link: linkedin.com/in/allison-munderloh-18204234a
+    link: https://linkedin.com/in/allison-munderloh-18204234a
   
   - name: email
     icon: fas fa-envelope

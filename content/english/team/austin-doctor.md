@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://workspace.google.com/products/drive/
+    link: https://drive.google.com/file/d/1TaeMHqb5745Dy1rO_CGpuv-5ljxasAzJ/view
 
   - name: google scholar
     icon: fas fa-graduation-cap
