@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://workspace.google.com/products/drive/
+    link: "/documents/Brady.CV.February.2026.pdf"
 
   - name: linkedin
     icon: fab fa-linkedin-in
