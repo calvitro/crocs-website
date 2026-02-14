@@ -1,0 +1,33 @@
+{{ if .IsHome }}
+  {{ with site.GetPage "sections/news" }}
+    {{ if .Params.enable_ticker }}
+      <div class="news-ticker-container">
+        <div class="news-ticker-wrapper">
+<a href="/news/" class="news-ticker-label">
+  <i class="fas fa-newspaper"></i>
+  <span>Latest News</span>
+</a>
+          <div class="news-ticker">
+            <div class="news-ticker-content">
+              {{ range first 5 (where site.RegularPages "Section" "news") }}
+                <span class="news-item">
+                  <a href="{{ .Permalink }}">{{ .Title }}</a>
+                  <span class="news-date">{{ .Date.Format "Jan 2" }}</span>
+                </span>
+                <span class="news-separator">•</span>
+              {{ end }}
+              <!-- Duplicate content for seamless loop -->
+              {{ range first 5 (where site.RegularPages "Section" "news") }}
+                <span class="news-item">
+                  <a href="{{ .Permalink }}">{{ .Title }}</a>
+                  <span class="news-date">{{ .Date.Format "Jan 2" }}</span>
+                </span>
+                <span class="news-separator">•</span>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+{{ end }}
