@@ -1,5 +1,5 @@
 ---
 title: "Manuscripts"
 meta_title: ""
-description: "this is meta description"
+description: "CROCS Lab - Manuscripts"
 ---

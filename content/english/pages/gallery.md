@@ -3,7 +3,7 @@ title: "Gallery"
 # meta title
 meta_title: ""
 # meta description
-description: "This is meta description"
+description: "CROCS Lab gallery"
 # save as draft
 draft: false
 ---

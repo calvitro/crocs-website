@@ -1,5 +1,5 @@
 ---
 title: "All Research"
 meta_title: ""
-description: "this is meta description"
+description: "CROCS Lab - All Research"
 ---

@@ -1,5 +1,5 @@
 ---
 title: "Lab News"
 meta_title: ""
-description: "this is meta description"
+description: "CROCS Lab News"
 ---
