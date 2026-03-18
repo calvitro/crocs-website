@@ -41,7 +41,7 @@
 {{ $authorName := .Title }}
 {{ $authorPosts := slice }}
 
-{{ $allowedSections := slice "research" "blog" }}
+{{ $allowedSections := slice "research"}}
 
 {{ range $allowedSections }}
   {{ $section := . }}
@@ -130,7 +130,7 @@
         No research papers found for {{ .Title }}.
       </p>
       <a href="{{ `research/` | relLangURL }}" class="btn btn-primary mt-4">
-        <i class="fas fa-arrow-left mr-2"></i>
+        <i class="fas fa-book mr-2"></i>
         View All Research
       </a>
     </div>
@@ -178,6 +178,106 @@
           </div>
         </div>
       {{ end }}
+
+      <!-- Research Insights Section -->
+{{ $authorName := .Title }}
+{{ $authorPosts := slice }}
+
+{{ $allowedSections := slice "research-insights"}}
+
+{{ range $allowedSections }}
+  {{ $section := . }}
+  {{ $sectionPosts := where (where site.RegularPages "Section" "==" $section) "Params.author" "==" $authorName }}
+  {{ $authorPosts = $authorPosts | append $sectionPosts }}
+{{ end }}
+
+{{ range site.RegularPages }}
+  {{ if and (in $allowedSections .Section) .Params.authors }}
+    {{ if reflect.IsSlice .Params.authors }}
+      {{ if in .Params.authors $authorName }}
+        {{ $authorPosts = $authorPosts | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $authorPosts = uniq $authorPosts }}
+{{ $authorPosts = sort $authorPosts "Date" "desc" }}
+
+{{ $slug := .File.BaseFileName }}
+
+{{ if $authorPosts }}
+<div class="row pt-14 border-t border-border dark:border-darkmode-border mt-14">
+    <div class="col-12 mb-8">
+      <h2 class="h3">Research Insights by {{ .Title }}</h2>
+      <p class="text-text-light dark:text-darkmode-text-light">
+        {{ len $authorPosts }} research insights {{ if ne (len $authorPosts) 1 }}s{{ end }} found
+      </p>
+    </div>
+
+    <!-- First 3 -->
+    {{ range first 3 $authorPosts }}
+      <div class="md:col-6 lg:col-4 mb-12">
+        {{ partial "components/blog-card" . }}
+      </div>
+    {{ end }}
+
+    <!-- Hidden rest -->
+    {{ $rest := after 3 $authorPosts }}
+    {{ if gt (len $authorPosts) 3 }}
+  <div class="col-12 text-center mt-4">
+    <button id="toggle-pubs-{{ $slug }}" 
+      class="btn btn-primary">
+      Show All {{ .Title }}'s research insights
+    </button>
+      </div>
+
+      <div id="all-pubs-{{ $slug }}" class="hidden w-full mt-8">
+        <div class="row">
+          {{ range $rest }}
+            <div class="md:col-6 lg:col-4 mb-12">
+              {{ partial "components/blog-card" . }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var btn = document.getElementById('toggle-pubs-{{ $slug }}');
+          var box = document.getElementById('all-pubs-{{ $slug }}');
+          if (!btn || !box) return;
+
+          btn.addEventListener('click', function () {
+            var hidden = box.classList.contains('hidden');
+            if (hidden) {
+              box.classList.remove('hidden');
+              btn.textContent = 'Show fewer research insights';
+              btn.setAttribute('aria-expanded', 'true');
+            } else {
+              box.classList.add('hidden');
+              btn.textContent = 'Show All {{ .Title }}’s Research Insights';
+              btn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        })();
+      </script>
+    {{ end }}
+  </div>
+{{ else }}
+<div class="row pt-14 border-t border-border dark:border-darkmode-border mt-14">
+    <div class="col-12 text-center">
+      <h2 class="h4 mb-4">No Research Insights Found</h2>
+      <p class="text-text-light dark:text-darkmode-text-light">
+        No research insights yet by {{ .Title }}.
+      </p>
+      <a href="{{ `research/` | relLangURL }}" class="btn btn-primary mt-4">
+        <i class="fas fa-chart-line mr-2"></i>
+        View All Research Insights
+      </a>
+    </div>
+  </div>
+{{ end }}
     </div>
   </section>
 {{ end }}

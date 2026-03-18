@@ -42,7 +42,7 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  animation: scroll 50s linear infinite;
+  animation: scroll 75s linear infinite;
 }
 
 .news-item {
