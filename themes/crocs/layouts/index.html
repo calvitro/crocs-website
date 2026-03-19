@@ -61,34 +61,59 @@
   {{ end }}
   <!-- /Features -->
 
-  <!-- Testimonials -->
-  {{ with site.GetPage "sections/testimonial" }}
-    {{ if .Params.enable }}
-      <section class="section">
-        <div class="container">
-          <div class="row">
-            <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
-              <h2 class="mb-4">
-                {{ .Title | markdownify }}
-              </h2>
-              <p>
-                {{ .Params.description | markdownify }}
-              </p>
-            </div>
-            <div class="col-12">
-              <div class="row justify-center">
-                {{ range .Params.projects }}
-                  <div class="lg:col-4 md:col-8 mb-8">
-                    {{ partial "components/blog-card.html" (dict "Title" .title "Permalink" .link "Summary" .description "Params" (dict "image" .avatar "authors" .authors "categories" .categories)) }}
-                  </div>
-                {{ end }}
-              </div>
+<!-- Snapshot -->
+{{ with site.GetPage "sections/snapshot" }}
+  {{ if .Params.enable }}
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="md:col-10 lg:col-8 xl:col-6 mx-auto mb-12 text-center">
+            <h2 class="mb-4">
+              {{ .Title | markdownify }}
+            </h2>
+            <p>
+              {{ .Params.description | markdownify }}
+            </p>
+          </div>
+          <div class="col-12">
+            <div class="row justify-center">
+{{ $cutoff := now.AddDate -1 0 0 }}
+{{ $research := where site.RegularPages "Section" "research" }}
+{{ $recent := where $research "Date" "ge" $cutoff }}
+{{ $pool := $recent }}
+{{ if lt (len $recent) 3 }}
+  {{ $pool = $research }}
+{{ end }}
+{{ $pool = $pool.ByDate.Reverse }}
+{{ $count := len $pool }}
+{{ $picked := slice }}
+{{ range seq 1 20 }}
+  {{ if lt (len $picked) 3 }}
+    {{ $rand := math.Rand }}
+    {{ $i := mod (int (mul $rand 1000)) $count }}
+    {{ $page := index $pool $i }}
+    {{ if not (in $picked $page) }}
+      {{ $picked = $picked | append $page }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ range $picked }}
+  <div class="lg:col-4 md:col-8 mb-8">
+    {{ partial "components/blog-card.html" (dict
+      "Title" .Title
+      "Permalink" .Permalink
+      "Summary" .Summary
+      "Params" .Params
+    ) }}
+  </div>
+{{ end }}
             </div>
           </div>
         </div>
-      </section>
-    {{ end }}
+      </div>
+    </section>
   {{ end }}
-  <!-- /Testimonials -->
+{{ end }}
+<!-- /Snapshot -->
 
 {{ end }}

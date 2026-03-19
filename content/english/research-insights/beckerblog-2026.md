@@ -1,5 +1,5 @@
 ---
-title: "Data Collection: Logistics of a Novel Conjoint Study"
+title: "Data collection: Logistics of a novel conjoint study"
 meta_title: ""
 description: "Data collection blog - Becker"
 date: 2026-03-17T05:00:00Z
@@ -16,7 +16,7 @@ In criminological research, we often focus on the **_what_**—the results, the 
 
 Specifically, we wanted to know **_why data managers approve or deny geospatial data requests_**. This was part of a broader project examining how violent non-state actors could use emerging geospatial technologies to conduct attacks. To do this, we deployed a **survey conjoint**—a method that forces participants to make trade-offs between competing factors (e.g., the urgency of a request vs. the sensitivity of the data). However, ensuring our study felt "real" to experts meant moving beyond standard survey templates and into custom-built tools and carefully managed data collection pipelines. 
 
-## The Project Lifecycle: From Idea to Integrity
+## The Project Lifecycle: From Idea to Execution
 
 Designing an experimental survey in a security context required a strategic roadmap. Here is how we set up our timeline:
 
