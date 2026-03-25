@@ -258,8 +258,8 @@
       
       <!-- 1. First priority: Posts with matching categories -->
       {{ if $currentCategories }}
-        {{ range site.RegularPages }}
-          {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.categories }}
+  {{ range where site.RegularPages "Section" "in" (slice "blog" "research") }}
+    {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.categories }}
             {{ $hasMatchingCategory := false }}
             {{ range .Params.categories }}
               {{ if in $currentCategories . }}
@@ -276,8 +276,8 @@
 
       <!-- 3. Third priority: Posts with matching tags (if we still need more) -->
       {{ if and (lt (len $relatedPosts) 10) $currentTags }}
-        {{ range site.RegularPages }}
-          {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.tags }}
+  {{ range where site.RegularPages "Section" "in" (slice "blog" "research") }}
+    {{ if and (ne .Title $currentTitle) (not (in $seenTitles .Title)) .Params.tags }}
             {{ $hasMatchingTag := false }}
             {{ range .Params.tags }}
               {{ if in $currentTags . }}
