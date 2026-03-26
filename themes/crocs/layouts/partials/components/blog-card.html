@@ -23,33 +23,28 @@
     <ul class="mb-4">
       <!-- Authors Section -->
       {{ with .Params.authors }}
-        {{ if reflect.IsSlice . }}
-          <li class="mr-4 inline-block">
-            <i class="fa-regular fa-circle-user mr-2"></i>
-            {{ range $i, $author := . }}
-              <a href="{{ `team/` | relLangURL }}{{ $author | urlize }}" 
-                 class="author-filter-link" 
-                 data-author="{{ $author }}">
-                {{ $author }}
-              </a>{{ if ne $i (sub (len .) 1) }}, {{ end }}
-            {{ end }}
-          </li>
-        {{ else }}
-          <li class="mr-4 inline-block">
-            <i class="fa-regular fa-circle-user mr-2"></i>
-            <a href="{{ `research/` | relLangURL }}#author={{ . | urlize }}" 
-               class="author-filter-link" 
-               data-author="{{ . }}">
-              {{ . }}
-            </a>
-          </li>
+        {{ $authors := . }}
+        {{ if not (reflect.IsSlice .) }}
+          {{ $authors = slice . }}
         {{ end }}
+        <li class="mr-4 inline-block">
+          <i class="fa-regular fa-circle-user mr-2"></i>
+          {{ range $i, $author := $authors }}
+            {{ $slug := $author | urlize }}
+            <a href="#"
+               class="author-filter-link"
+               data-author="{{ $author }}"
+               data-author-slug="{{ $slug }}">
+              {{ $author }}
+            </a>{{ if ne $i (sub (len $authors) 1) }}, {{ end }}
+          {{ end }}
+        </li>
       {{ end }}
 
-      <!-- categories Section -->
+      <!-- Categories Section -->
       <li class="mr-4 inline-block">
         <i class="fa-regular fa-folder mr-1"></i>
-        {{ range $i,$p:= $categories }}
+        {{ range $i, $p := $categories }}
           <a href="{{ `categories/` | relLangURL }}{{ . | urlize | lower }}/" class="ms-1">
             {{ . | humanize }}{{ if ne $i (sub (len $categories) 1) }}{{ "," }}{{ end }}
           </a>

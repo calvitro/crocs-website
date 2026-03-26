@@ -112,6 +112,62 @@
         </div>
       </div>
     </section>
+
+<script>
+  // Create author slug from display name
+  function snapshotCreateAuthorSlug(authorName) {
+    return authorName
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  // Check if an author's team page exists
+  async function snapshotAuthorPageExists(authorSlug) {
+    try {
+      const urls = [
+        `/team/${authorSlug}/`,
+        `/team/${authorSlug}`,
+        `/team/${authorSlug}.html`,
+      ];
+      for (const url of urls) {
+        const response = await fetch(url, { method: 'HEAD', cache: 'no-cache' });
+        if (response.ok) return { exists: true, url };
+      }
+      return { exists: false, url: null };
+    } catch (e) {
+      return { exists: false, url: null };
+    }
+  }
+
+  // Handle author link click: go to team page or research list filtered by author
+  async function snapshotHandleAuthorClick(event, authorName, authorSlug) {
+    event.preventDefault();
+    const slug = authorSlug || snapshotCreateAuthorSlug(authorName);
+    const pageCheck = await snapshotAuthorPageExists(slug);
+    if (pageCheck.exists) {
+      window.location.href = pageCheck.url;
+    } else {
+      // Use full absolute path to avoid landing on /#
+      const researchBase = window.location.origin + '/research/';
+      window.location.href = researchBase + '#author=' + encodeURIComponent(slug);
+    }
+  }
+
+  // Attach on DOMContentLoaded to ensure cards are rendered
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.author-filter-link').forEach(link => {
+      link.addEventListener('click', function(event) {
+        const authorName = this.dataset.author || this.textContent.trim();
+        const authorSlug = this.dataset.authorSlug;
+        snapshotHandleAuthorClick(event, authorName, authorSlug);
+      });
+    });
+  });
+</script>
   {{ end }}
 {{ end }}
 <!-- /Snapshot -->
