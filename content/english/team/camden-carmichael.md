@@ -4,7 +4,7 @@ role: "graduate student"
 meta_title: ""
 email: camdencarmichael@unomaha.edu
 description: "camden carmichael"
-image: "/images/Carmichael-Photo.png"
+image: "/images/Carmichael-AprilFools.png"
 categories: ["ISIS", "Courts", "Emerging Threats"]
 draft: false
 social:
