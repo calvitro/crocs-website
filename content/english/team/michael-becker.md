@@ -1,6 +1,6 @@
 ---
 title: "Michael Becker"
-role: "research associate"
+role: "external affiliate"
 meta_title: ""
 email: mbecker26@unomaha.edu
 description: "Michael Becker"
