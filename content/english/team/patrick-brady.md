@@ -5,7 +5,7 @@ meta_title: ""
 email: pbrady@unomaha.edu
 description: "patrick brady"
 image: "/images/Brady-Photo.png"
-categories: ["Topic", "Terrorism"]
+categories: ["Police", "Terrorism"]
 draft: false
 social:
   - name: CV

@@ -5,7 +5,7 @@ meta_title: ""
 email: bbuxton@unomaha.edu
 description: "Brooke Buxton"
 image: "/images/Buxton-Photo.png"
-categories: ["ISIS", "Topic"]
+categories:
 draft: false
 social:
   - name: CV
