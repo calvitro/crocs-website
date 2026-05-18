@@ -1,6 +1,6 @@
 ---
 title: "Brooke Buxton"
-role: "graduate student"
+role: "lab alumni"
 meta_title: ""
 email: bbuxton@unomaha.edu
 description: "Brooke Buxton"

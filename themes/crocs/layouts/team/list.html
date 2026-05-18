@@ -50,5 +50,15 @@
               </div>
             {{ end }}
           </div>
+          <!-- Lab Alumni Section -->
+          <h2 class="text-left text-2xl font-semibold mb-8 text-[#444444] text-darkmode-text-light">Lab Alumni</h2>
+          <div class="row pb-8">
+            {{ $labAlumni := where site.RegularPages "Params.role" "==" "lab alumni" }}
+            {{ range $labAlumni }}
+              <div class="md:col-6 lg:col-4 mb-12">
+                {{ partial "components/author-card" . }}
+              </div>
+            {{ end }}
+          </div>
         </div>
 {{ end }}

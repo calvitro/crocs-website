@@ -1,6 +1,6 @@
 ---
 title: "Michael Becker"
-role: "external affiliate"
+role: "lab alumni"
 meta_title: ""
 email: mbecker26@unomaha.edu
 description: "Michael Becker"
