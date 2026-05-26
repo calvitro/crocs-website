@@ -1,5 +1,5 @@
 ---
-title: "Alma Harrison"
+title: "Ali Harrison"
 role: "graduate student"
 meta_title: ""
 email: aliharrison@unomaha.edu
