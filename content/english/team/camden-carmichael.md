@@ -10,7 +10,7 @@ draft: false
 social:
   - name: CV
     icon: fas fa-file-lines
-    link: https://uofnebraska-my.sharepoint.com/:w:/g/personal/72945516_nebraska_edu/Ecf1osd8cA1PvS9udXOvw2wBnJIWOg-pJ_N9MhZrvtIyOg?e=YUiFRw
+    link: https://docs.google.com/document/d/1iaqAlnSetoEBCDMAb84Z2H6B5x2Oc4Vh/edit?usp=sharing&ouid=113626029025953932243&rtpof=true&sd=true
 
   - name: google scholar
     icon: fas fa-graduation-cap
